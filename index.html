@@ -4,8 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Personal Web Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to My Personal Web Page</h1>
+    <div class="container">
+        <nav class="navbar">
+            <div class="brand-name">MyName</div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </nav>
+        <div class="intro-section" id="home">
+            <h1>Welcome to My Personal Web Page</h1>
+            <p class="intro-text">
+                I'm a passionate developer who loves creating beautiful and functional web experiences.
+                [Add your personal introduction here]
+            </p>
+            <img src="your-image.jpg" alt="Your Name" class="profile-image">
+        </div>
+        <div class="about-section" id="about">
+            <h2>About Me</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Education</h3>
+                    <ul>
+                        <li>Degree Name - University Name</li>
+                        <li>Year of Graduation</li>
+                        <li>Relevant Coursework or Achievements</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <h3>Background</h3>
+                    <p>Write about your professional journey, experiences, and what drives you. Share your passion for technology and development.</p>
+                </div>
+            </div>
+        </div>
+        <div class="testimonials-section" id="testimonials">
+            <h2>What People Say</h2>
+            <div class="testimonials-carousel">
+                <button class="carousel-button prev">❮</button>
+                <div class="testimonials-container">
+                    <div class="testimonials-track">
+                        <!-- Testimonials will be loaded dynamically -->
+                    </div>
+                </div>
+                <button class="carousel-button next">❯</button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+        <div class="contact-section" id="contact">
+            <h2>Get in Touch</h2>
+            <p class="contact-intro">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            <div class="contact-grid">
+                <a href="tel:+1234567890" class="contact-item">
+                    <i class="contact-icon">📞</i>
+                    <span>+1 (234) 567-890</span>
+                </a>
+                <a href="https://t.me/yourusername" class="contact-item">
+                    <i class="contact-icon">✈️</i>
+                    <span>Telegram</span>
+                </a>
+                <a href="https://instagram.com/yourusername" class="contact-item">
+                    <i class="contact-icon">📸</i>
+                    <span>Instagram</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load testimonials data
+            const response = await fetch('testimonials.json');
+            const data = await response.json();
+            const testimonials = data.testimonials;
+            
+            // Get DOM elements
+            const track = document.querySelector('.testimonials-track');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            
+            let currentIndex = 0;
+            
+            // Create testimonial cards
+            testimonials.forEach(testimonial => {
+                const card = document.createElement('div');
+                card.classList.add('testimonial-card');
+                card.innerHTML = `
+                    <p class="testimonial-text">"${testimonial.text}"</p>
+                    <div class="testimonial-author">
+                        <img src="${testimonial.author.image}" alt="${testimonial.author.name}" class="testimonial-avatar">
+                        <div class="author-info">
+                            <h4>${testimonial.author.name}</h4>
+                            <p>${testimonial.author.position}</p>
+                        </div>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+            
+            const slides = document.querySelectorAll('.testimonial-card');
+            
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+            
+            function updateDots() {
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            function goToSlide(index) {
+                currentIndex = index;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateDots();
+            }
+            
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                goToSlide(currentIndex);
+            });
+            
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                goToSlide(currentIndex);
+            });
+            
+            // Optional: Auto-play
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                goToSlide(currentIndex);
+            }, 5000);
+        });
+    </script>
 </body>
 </html>

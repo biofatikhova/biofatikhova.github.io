@@ -1,0 +1,28 @@
+{
+    "testimonials": [
+        {
+            "text": "Working with them was an absolute pleasure. Their attention to detail and creative solutions exceeded our expectations.",
+            "author": {
+                "name": "John Doe",
+                "position": "CEO, Tech Corp",
+                "image": "person1.jpg"
+            }
+        },
+        {
+            "text": "An exceptional developer who brings both technical expertise and creative insight to every project.",
+            "author": {
+                "name": "Jane Smith",
+                "position": "Lead Designer, Creative Studio",
+                "image": "person2.jpg"
+            }
+        },
+        {
+            "text": "Their work has significantly improved our user engagement and overall site performance.",
+            "author": {
+                "name": "Mike Johnson",
+                "position": "Product Manager, StartUp Inc",
+                "image": "person3.jpg"
+            }
+        }
+    ]
+} 
