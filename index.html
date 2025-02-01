@@ -15,6 +15,7 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#testimonials" class="nav-link">Testimonials</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
             </div>
         </nav>
         <div class="intro-section" id="home">
@@ -39,6 +40,77 @@
                 <div class="about-card">
                     <h3>Background</h3>
                     <p>Write about your professional journey, experiences, and what drives you. Share your passion for technology and development.</p>
+                </div>
+            </div>
+        </div>
+        <div class="lessons-section" id="lessons">
+            <h2>Sample Lessons</h2>
+            <p class="lessons-intro">Take a look at some of my actual lessons and teaching materials</p>
+            <div class="lessons-grid">
+                <div class="lesson-card" onclick="openLightbox(0)">
+                    <img src="lesson1.jpg" alt="Lesson Example 1" class="lesson-thumbnail">
+                    <div class="lesson-overlay">
+                        <span>Python Basics</span>
+                    </div>
+                </div>
+                <div class="lesson-card" onclick="openLightbox(1)">
+                    <img src="lesson2.jpg" alt="Lesson Example 2" class="lesson-thumbnail">
+                    <div class="lesson-overlay">
+                        <span>Data Structures</span>
+                    </div>
+                </div>
+                <!-- Add more lesson cards as needed -->
+            </div>
+        </div>
+        <!-- Lightbox for lesson images -->
+        <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <button class="lightbox-nav prev" onclick="changeLightboxImage(-1, event)">❮</button>
+            <button class="lightbox-nav next" onclick="changeLightboxImage(1, event)">❯</button>
+            <div class="lightbox-content">
+                <img id="lightbox-image" src="" alt="Lesson Preview">
+            </div>
+        </div>
+        <div class="pricing-section" id="pricing">
+            <h2>Tutoring Packages</h2>
+            <p class="pricing-intro">Choose the perfect learning package that suits your needs</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Single Lesson</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">50</span>
+                            <span class="period">/lesson</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✓ 1-hour one-on-one session</li>
+                        <li>✓ Personalized learning plan</li>
+                        <li>✓ Homework assignments</li>
+                        <li>✓ Basic email support</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Package of 4 Lessons</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">40</span>
+                            <span class="period">/lesson</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✓ All Single Lesson features</li>
+                        <li>✓ Progress tracking</li>
+                        <li>✓ Study materials included</li>
+                        <li>✓ Priority scheduling</li>
+                        <li>✓ 15% savings on lessons</li>
+                    </ul>
+                    <a href="#contact" class="pricing-cta">Choose Package</a>
                 </div>
             </div>
         </div>
@@ -78,5 +150,6 @@
         import { initializeCarousel } from './carousel.js';
         document.addEventListener('DOMContentLoaded', initializeCarousel);
     </script>
+    <script src="lightbox.js"></script>
 </body>
 </html>
