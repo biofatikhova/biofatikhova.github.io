@@ -31,8 +31,10 @@ export async function initializeCarousel() {
                 slide.innerHTML = `
                     <div class="testimonial-content">
                         <p class="testimonial-subject">${testimonial.subject}</p>
-                        <p class="testimonial-text">${testimonial.review || ''}</p>
-                        ${testimonial.response ? `<p class="testimonial-response">${testimonial.response}</p>` : ''}
+                        <div class="testimonial-text-container">
+                            <p class="testimonial-text">${testimonial.review || ''}</p>
+                            ${testimonial.response ? `<p class="testimonial-response">${testimonial.response}</p>` : ''}
+                        </div>
                         <div class="testimonial-footer">
                             <div class="testimonial-author-info">
                                 <p class="author-name">${testimonial.author}</p>
