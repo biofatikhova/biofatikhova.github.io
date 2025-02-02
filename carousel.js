@@ -74,7 +74,9 @@ export async function initializeCarousel() {
             } else {
                 currentIndex = index;
             }
-            const offset = -currentIndex * 100; // Assuming each slide is 100% width
+            
+            // Update to use percentage and handle width properly
+            const offset = -currentIndex * 100;
             track.style.transform = `translateX(${offset}%)`;
             updateDots();
         }

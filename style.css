@@ -123,25 +123,9 @@ body {
     color: var(--secondary-color);
 }
 
-.testimonials-carousel {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 0 40px; /* Add padding to make room for buttons */
-}
-
-.testimonial-text-container {
-    flex: 1;
-    overflow-y: auto;
-    margin-bottom: 1rem;
-    padding-right: 10px; /* Space for scrollbar */
-}
-
-.testimonials-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+.testimonials-container {
+    width: 100%;
+    overflow: hidden;
 }
 
 .testimonial-card {
@@ -152,7 +136,7 @@ body {
     padding: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     margin: 0;
-    height: 400px; /* Fixed height */
+    height: 400px;
     transition: transform 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
     display: flex;
@@ -165,6 +149,17 @@ body {
     height: 100%;
 }
 
+.testimonial-text-container {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 10px;
+}
+
+.testimonial-text, .testimonial-response {
+    margin-bottom: 1rem;
+}
+
 .testimonial-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -175,7 +170,7 @@ body {
     color: var(--primary-color);
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    flex-shrink: 0; /* Prevents shrinking */
+    flex-shrink: 0;
 }
 
 .testimonial-text {
@@ -199,10 +194,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto; /* Pushes footer to bottom */
+    margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid var(--light-gray);
-    flex-shrink: 0; /* Prevents shrinking */
+    flex-shrink: 0;
 }
 
 /* Custom scrollbar styles */
@@ -251,8 +246,8 @@ body {
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 2; /* Increase z-index to ensure buttons are clickable */
-    position: absolute; /* Make buttons absolute positioned */
+    z-index: 2;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
