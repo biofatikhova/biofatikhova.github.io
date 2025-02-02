@@ -137,22 +137,30 @@ body {
     background: white;
     border-radius: 8px;
     padding: 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     margin: 0 1rem;
-    max-height: 300px; /* Set a maximum height for the testimonial card */
-    overflow-y: auto;  /* Allow vertical scrolling within the card */
+    max-height: 300px;
+    overflow-y: auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .testimonial-subject {
     font-weight: bold;
-    color: #333;
+    color: #007bff;
     margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .testimonial-text {
     color: #555;
     line-height: 1.6;
     margin-bottom: 1rem;
+    font-size: 1rem;
 }
 
 .testimonial-response {
@@ -162,6 +170,7 @@ body {
     border-radius: 4px;
     margin: 1rem 0;
     font-style: italic;
+    font-size: 0.95rem;
 }
 
 .testimonial-footer {
