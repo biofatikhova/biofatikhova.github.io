@@ -3,60 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Web Page</title>
+    <title>БиоФатихова</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <nav class="navbar">
-            <div class="brand-name">MyName</div>
+            <div class="brand-name">БиоФатихова</div>
             <div class="nav-links">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#testimonials" class="nav-link">Testimonials</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#home" class="nav-link">Главная</a>
+                <a href="#about" class="nav-link">Обо мне</a>
+                <a href="#testimonials" class="nav-link">Отзывы</a>
+                <a href="#contact" class="nav-link">Контакты</a>
+                <a href="#pricing" class="nav-link">Расценки</a>
             </div>
         </nav>
         <div class="intro-section" id="home">
-            <h1>Welcome to My Personal Web Page</h1>
+            <h1>Добро пожаловать на мой сайт!</h1>
             <p class="intro-text">
-                I'm a passionate developer who loves creating beautiful and functional web experiences.
-                [Add your personal introduction here]
+                Меня зовут Маргарита Фатихова, и я преподаватель по биологии.
             </p>
             <img src="./images/profile/profile.jpg" alt="Your Name" class="profile-image">
         </div>
         <div class="about-section" id="about">
-            <h2>About Me</h2>
+            <h2>Обо мне</h2>
             <div class="about-grid">
                 <div class="about-card">
-                    <h3>Education</h3>
+                    <h3>Образование</h3>
                     <ul>
-                        <li>Degree Name - University Name</li>
-                        <li>Year of Graduation</li>
-                        <li>Relevant Coursework or Achievements</li>
+                        <li>Магистр 2023 - Факультет педагогики КФУ</li>
+                        <li>Бакалавр 2021 - Факультет биологии КФУ</li>
                     </ul>
                 </div>
                 <div class="about-card">
-                    <h3>Background</h3>
-                    <p>Write about your professional journey, experiences, and what drives you. Share your passion for technology and development.</p>
+                    <h3>Опыт работы</h3>
+                    <ul>
+                        <li>2 года преподавания в школах и лицеях</li>
+                        <li>более 2 лет опыта в репетиторстве</li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="lessons-section" id="lessons">
-            <h2>Sample Lessons</h2>
-            <p class="lessons-intro">Take a look at some of my actual lessons and teaching materials</p>
+            <h2>Примеры моих занятий</h2>
+            <p class="lessons-intro">Посмотрите на мои занятия и учебные материалы</p>
             <div class="lessons-grid">
                 <div class="lesson-card" onclick="openLightbox(0)">
                     <img src="./images/lessons/lesson1.jpg" alt="Lesson Example 1" class="lesson-thumbnail">
                     <div class="lesson-overlay">
-                        <span>Python Basics</span>
+                        <span>Биология 10 класс</span>
                     </div>
                 </div>
                 <div class="lesson-card" onclick="openLightbox(1)">
                     <img src="./images/lessons/lesson2.jpg" alt="Lesson Example 2" class="lesson-thumbnail">
                     <div class="lesson-overlay">
-                        <span>Data Structures</span>
+                        <span>Биология 11 класс</span>
                     </div>
                 </div>
                 <!-- Add more lesson cards as needed -->
@@ -72,50 +73,48 @@
             </div>
         </div>
         <div class="pricing-section" id="pricing">
-            <h2>Tutoring Packages</h2>
-            <p class="pricing-intro">Choose the perfect learning package that suits your needs</p>
+            <h2>Тарифы</h2>
+            <p class="pricing-intro">Выберите тариф, который подходит вам</p>
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Single Lesson</h3>
+                        <h3>Одно занятие</h3>
                         <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">50</span>
-                            <span class="period">/lesson</span>
+                            <span class="currency">₽</span>
+                            <span class="amount">2000</span>
+                            <span class="period">/занятие</span>
                         </div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✓ 1-hour one-on-one session</li>
-                        <li>✓ Personalized learning plan</li>
-                        <li>✓ Homework assignments</li>
-                        <li>✓ Basic email support</li>
+                        <li>✓ Часовое персональное занятие</li>
+                        <li>✓ Оценка знаний</li>
+                        <li>✓ Консультация</li>
                     </ul>
-                    <a href="#contact" class="pricing-cta">Get Started</a>
+                    <a href="#contact" class="pricing-cta">Выбрать тариф</a>
                 </div>
                 
                 <div class="pricing-card popular">
-                    <div class="popular-badge">Most Popular</div>
+                    <div class="popular-badge">Самый популярный</div>
                     <div class="pricing-header">
-                        <h3>Package of 4 Lessons</h3>
+                        <h3>Пакет из 4 занятий</h3>
                         <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">40</span>
-                            <span class="period">/lesson</span>
+                            <span class="currency">₽</span>
+                            <span class="amount">1500</span>
+                            <span class="period">/занятие</span>
                         </div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✓ All Single Lesson features</li>
-                        <li>✓ Progress tracking</li>
-                        <li>✓ Study materials included</li>
-                        <li>✓ Priority scheduling</li>
-                        <li>✓ 15% savings on lessons</li>
+                        <li>✓ Персональный план обучения</li>
+                        <li>✓ Домашние задания</li>
+                        <li>✓ Учебные материалы</li>
+                        <li>✓ Онлайн поддержка</li>
                     </ul>
-                    <a href="#contact" class="pricing-cta">Choose Package</a>
+                    <a href="#contact" class="pricing-cta">Выбрать тариф</a>
                 </div>
             </div>
         </div>
         <div class="testimonials-section" id="testimonials">
-            <h2>What People Say</h2>
+            <h2>Отзывы</h2>
             <div class="testimonials-carousel">
                 <button class="carousel-button prev">❮</button>
                 <div class="testimonials-container">
@@ -128,18 +127,18 @@
             <div class="carousel-dots"></div>
         </div>
         <div class="contact-section" id="contact">
-            <h2>Get in Touch</h2>
-            <p class="contact-intro">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            <h2>Свяжитесь со мной</h2>
+            <p class="contact-intro">Я всегда открыта для новых возможностей и сотрудничества.</p>
             <div class="contact-grid">
                 <a href="tel:+1234567890" class="contact-item">
                     <i class="contact-icon">📞</i>
-                    <span>+1 (234) 567-890</span>
+                    <span>+7 (937) 523-02-28</span>
                 </a>
-                <a href="https://t.me/yourusername" class="contact-item">
+                <a href="https://t.me/biofatikhova" class="contact-item">
                     <i class="contact-icon">✈️</i>
                     <span>Telegram</span>
                 </a>
-                <a href="https://instagram.com/yourusername" class="contact-item">
+                <a href="https://instagram.com/margarita_fatikhova" class="contact-item">
                     <i class="contact-icon">📸</i>
                     <span>Instagram</span>
                 </a>
