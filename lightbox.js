@@ -1,6 +1,6 @@
 const lessonImages = [
-    'lesson1.jpg',
-    'lesson2.jpg',
+    './images/lessons/lesson1.jpg',
+    './images/lessons/lesson2.jpg',
     // Add more image paths as needed
 ];
 

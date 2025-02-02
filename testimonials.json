@@ -5,7 +5,7 @@
             "author": {
                 "name": "John Doe",
                 "position": "CEO, Tech Corp",
-                "image": "person1.jpg"
+                "image": "./images/testimonials/person1.jpg"
             }
         },
         {
@@ -13,7 +13,7 @@
             "author": {
                 "name": "Jane Smith",
                 "position": "Lead Designer, Creative Studio",
-                "image": "person2.jpg"
+                "image": "./images/testimonials/person2.jpg"
             }
         },
         {
@@ -21,7 +21,7 @@
             "author": {
                 "name": "Mike Johnson",
                 "position": "Product Manager, StartUp Inc",
-                "image": "person3.jpg"
+                "image": "./images/testimonials/person3.jpg"
             }
         }
     ]
