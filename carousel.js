@@ -11,8 +11,8 @@ export async function initializeCarousel() {
         // Get DOM elements
         const track = document.querySelector('.testimonials-track');
         const dotsContainer = document.querySelector('.carousel-dots');
-        const prevButton = document.querySelector('.prev');
-        const nextButton = document.querySelector('.next');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
         
         let currentIndex = 0;
         
@@ -52,19 +52,24 @@ export async function initializeCarousel() {
         
         function goToSlide(index) {
             currentIndex = index;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            const offset = -index * 100;
+            track.style.transform = `translateX(${offset}%)`;
             updateDots();
         }
         
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            goToSlide(currentIndex);
-        });
-        
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            goToSlide(currentIndex);
-        });
+        if (prevButton && nextButton) {
+            prevButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                goToSlide(currentIndex);
+            });
+            
+            nextButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentIndex = (currentIndex + 1) % slides.length;
+                goToSlide(currentIndex);
+            });
+        }
         
         // Optional: Auto-play
         setInterval(() => {
