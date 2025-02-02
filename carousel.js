@@ -21,12 +21,16 @@ export async function initializeCarousel() {
             const card = document.createElement('div');
             card.classList.add('testimonial-card');
             card.innerHTML = `
-                <p class="testimonial-text">"${testimonial.text}"</p>
-                <div class="testimonial-author">
-                    <img src="${testimonial.author.image}" alt="${testimonial.author.name}" class="testimonial-avatar">
-                    <div class="author-info">
-                        <h4>${testimonial.author.name}</h4>
-                        <p>${testimonial.author.position}</p>
+                <div class="testimonial-content">
+                    <p class="testimonial-subject">${testimonial.subject}</p>
+                    <p class="testimonial-text">${testimonial.review || ''}</p>
+                    ${testimonial.response ? `<p class="testimonial-response">${testimonial.response}</p>` : ''}
+                    <div class="testimonial-footer">
+                        <div class="testimonial-author-info">
+                            <p class="author-name">${testimonial.author}</p>
+                            <p class="testimonial-date">${testimonial.date}</p>
+                        </div>
+                        <div class="testimonial-score">${testimonial.score}</div>
                     </div>
                 </div>
             `;
