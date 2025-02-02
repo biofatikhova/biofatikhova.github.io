@@ -56,13 +56,13 @@ export async function initializeCarousel() {
         
         function goToSlide(index) {
             if (index < 0) {
-                currentIndex = slides.length - 1; // Go to the last slide if index is negative
+                currentIndex = slides.length - 1;
             } else if (index >= slides.length) {
-                currentIndex = 0; // Go to the first slide if index exceeds the number of slides
+                currentIndex = 0;
             } else {
                 currentIndex = index;
             }
-            const offset = -currentIndex * 100;
+            const offset = -currentIndex * 100; // Assuming each slide is 100% width
             track.style.transform = `translateX(${offset}%)`;
             updateDots();
         }
