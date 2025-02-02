@@ -17,25 +17,35 @@ export async function initializeCarousel() {
         let currentIndex = 0;
         
         // Create testimonial cards
-        testimonials.forEach(testimonial => {
-            const card = document.createElement('div');
-            card.classList.add('testimonial-card');
-            card.innerHTML = `
-                <div class="testimonial-content">
-                    <p class="testimonial-subject">${testimonial.subject}</p>
-                    <p class="testimonial-text">${testimonial.review || ''}</p>
-                    ${testimonial.response ? `<p class="testimonial-response">${testimonial.response}</p>` : ''}
-                    <div class="testimonial-footer">
-                        <div class="testimonial-author-info">
-                            <p class="author-name">${testimonial.author}</p>
-                            <p class="testimonial-date">${testimonial.date}</p>
+        const slidesPerView = 1; // Show one testimonial per slide
+        const totalSlides = Math.ceil(testimonials.length / slidesPerView);
+
+        for (let i = 0; i < totalSlides; i++) {
+            const slide = document.createElement('div');
+            slide.classList.add('testimonial-card');
+            
+            // Get the testimonial for this slide
+            const testimonial = testimonials[i];
+            
+            if (testimonial) {
+                slide.innerHTML = `
+                    <div class="testimonial-content">
+                        <p class="testimonial-subject">${testimonial.subject}</p>
+                        <p class="testimonial-text">${testimonial.review || ''}</p>
+                        ${testimonial.response ? `<p class="testimonial-response">${testimonial.response}</p>` : ''}
+                        <div class="testimonial-footer">
+                            <div class="testimonial-author-info">
+                                <p class="author-name">${testimonial.author}</p>
+                                <p class="testimonial-date">${testimonial.date}</p>
+                            </div>
+                            <div class="testimonial-score">${testimonial.score}</div>
                         </div>
-                        <div class="testimonial-score">${testimonial.score}</div>
                     </div>
-                </div>
-            `;
-            track.appendChild(card);
-        });
+                `;
+            }
+            
+            track.appendChild(slide);
+        }
         
         const slides = document.querySelectorAll('.testimonial-card');
         
