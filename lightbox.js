@@ -39,17 +39,3 @@ function changeLightboxImage(direction, event) {
     const lightboxImage = document.getElementById('lightbox-image');
     lightboxImage.src = lessonImages[currentImageIndex];
 }
-
-.testimonial-avatar {
-    width: 60px;  /* or your desired size */
-    height: 60px;
-    border-radius: 50%;  /* for circular images */
-    object-fit: cover;
-    display: block;  /* ensure it's not inline */
-}
-
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-} 
