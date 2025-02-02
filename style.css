@@ -126,11 +126,18 @@ body {
 .testimonials-container {
     width: 100%;
     overflow: hidden;
+    position: relative;
+}
+
+.testimonials-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
 }
 
 .testimonial-card {
     flex: 0 0 100%;
-    width: 100%;
+    min-width: 100%; /* Add this to ensure cards take full width */
     background: var(--background-white);
     border-radius: 8px;
     padding: 2rem;
