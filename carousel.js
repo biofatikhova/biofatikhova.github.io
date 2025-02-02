@@ -59,6 +59,12 @@ export async function initializeCarousel() {
             const offset = -index * 100;
             track.style.transform = `translateX(${offset}%)`;
             updateDots();
+            
+            // Ensure we can't scroll past the last slide
+            if (currentIndex >= slides.length) {
+                currentIndex = 0;
+                goToSlide(currentIndex);
+            }
         }
         
         if (prevButton && nextButton) {
@@ -75,10 +81,12 @@ export async function initializeCarousel() {
             });
         }
         
-        // Optional: Auto-play
+        // Update the auto-play interval to check for valid slides
         setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            goToSlide(currentIndex);
+            if (slides.length > 0) {  // Only auto-play if we have slides
+                currentIndex = (currentIndex + 1) % slides.length;
+                goToSlide(currentIndex);
+            }
         }, 5000);
     } catch (error) {
         console.error('Error loading testimonials:', error);
