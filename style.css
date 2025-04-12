@@ -193,27 +193,124 @@
     right: 20px;
   }
   
+  /* Testimonials Section */
+  #testimonials {
+    padding: 4rem 0;
+    position: relative;
+  }
+  
+  #testimonials h2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  #testimonials p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+  
   /* Carousel for Testimonials */
   .carousel {
     position: relative;
     overflow: hidden;
+    padding: 0 2.5rem;
+    margin: 2rem auto;
+    max-width: 800px; /* Increased from 650px for wider cards */
   }
   
   .carousel-container {
     overflow: hidden;
+    border-radius: 12px;
   }
   
   .testimonials-track {
     display: flex;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
+  }
+  
+  .testimonials-track.sliding {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
   
   /* Each testimonial card occupies full slide width */
   .testimonial-card {
     width: 100%;
     flex-shrink: 0;
-    text-align: center;
-    padding: 1rem;
+    text-align: left;
+    padding: 2rem 2.5rem;
+    position: relative;
+    height: 280px; /* Slightly smaller fixed height */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .testimonial-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .testimonial-text-container {
+    position: relative;
+    flex-grow: 1;
+    overflow-y: auto; /* Add scrolling */
+    margin-bottom: 1rem;
+    padding-right: 0.5rem; /* Space for scrollbar */
+  }
+  
+  .testimonial-text-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .testimonial-text-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  
+  .testimonial-text-container::before {
+    content: '"';
+    font-size: 5rem;
+    line-height: 1;
+    position: absolute;
+    top: -2rem;
+    left: -1.5rem;
+    color: rgba(0, 123, 255, 0.1);
+    font-family: Georgia, serif;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .testimonial-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+    padding-right: 0.5rem;
+    padding-top: 0.75rem;
+  }
+  
+  .testimonial-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 0.75rem;
+    margin-top: auto; /* Push to bottom */
+    flex-shrink: 0; /* Prevent from being compressed */
+  }
+  
+  .author-name {
+    font-weight: bold;
+    margin-right: 0.5rem;
+    color: var(--secondary);
+    font-size: 0.95rem;
+  }
+  
+  .testimonial-date {
+    font-size: 0.85rem;
+    color: #777;
+    margin-left: auto;
   }
   
   /* Carousel Buttons */
@@ -226,41 +323,57 @@
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-button:hover {
+    background: var(--primary);
+    color: var(--white);
   }
   
   .carousel-button.prev {
-    left: 0;
+    left: 5px;
   }
   
   .carousel-button.next {
-    right: 0;
+    right: 5px;
   }
   
   .carousel-dots {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 1rem;
+    gap: 10px;
+    margin-top: 1.5rem;
   }
   
   .dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: #ddd;
     cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .dot:hover {
+    background: #bbb;
   }
   
   .dot.active {
-    background: var(--secondary);
+    background: var(--primary);
+    transform: scale(1.2);
   }
   
   /* Pricing Cards */
   .pricing-card {
     padding: 1rem;
-    border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
   }
