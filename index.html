@@ -2,127 +2,250 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>БиоФатихова</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Маргарита Фатихова - преподаватель биологии, репетитор. Подготовка к ЕГЭ, ОГЭ, помощь школьникам.">
+  <title>БиоФатихова - Преподаватель биологии</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-  <div class="container">
-    <nav class="navbar">
-      <div class="brand-name">БиоФатихова</div>
-      <div class="nav-links">
-        <a href="#home">Главная</a>
-        <a href="#about">Обо мне</a>
-        <a href="#testimonials">Отзывы</a>
-        <a href="#contact">Контакты</a>
-        <a href="#pricing">Расценки</a>
-      </div>
-    </nav>
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="#" class="brand">БиоФатихова</a>
+      <button class="mobile-toggle" aria-label="Toggle navigation">
+        <span>☰</span>
+      </button>
+      <nav class="nav-menu">
+        <a href="#home" class="nav-link active">Главная</a>
+        <a href="#about" class="nav-link">Обо мне</a>
+        <a href="#lessons" class="nav-link">Занятия</a>
+        <a href="#pricing" class="nav-link">Расценки</a>
+        <a href="#testimonials" class="nav-link">Отзывы</a>
+        <a href="#contact" class="nav-link">Контакты</a>
+      </nav>
+    </div>
+  </header>
 
-    <section id="home">
-      <h1>Добро пожаловать на мой сайт!</h1>
-      <p>Меня зовут Маргарита Фатихова, и я преподаватель по биологии.</p>
-      <img src="./images/profile/profile.jpg" alt="Маргарита Фатихова" class="profile-image">
-    </section>
-
-    <section id="about">
-      <h2>Обо мне</h2>
-      <div class="grid">
-        <article>
-          <h3>Образование</h3>
-          <ul>
-            <li>Магистр 2023 — Факультет педагогики КФУ</li>
-            <li>Бакалавр 2021 — Факультет биологии КФУ</li>
-          </ul>
-        </article>
-        <article>
-          <h3>Опыт работы</h3>
-          <ul>
-            <li>2 года преподавания в школах и лицеях</li>
-            <li>Более 2 лет репетиторского опыта</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="lessons">
-      <h2>Примеры моих занятий</h2>
-      <p>Посмотрите на мои занятия и учебные материалы</p>
-      <div class="grid lessons-grid">
-        <div class="lesson-card" onclick="openLightbox(0)">
-          <img src="./images/lessons/lesson1.jpg" alt="Lesson 1" class="lesson-thumbnail">
-          <div class="lesson-overlay"><span>Биология 10 класс</span></div>
-        </div>
-        <div class="lesson-card" onclick="openLightbox(1)">
-          <img src="./images/lessons/lesson2.jpg" alt="Lesson 2" class="lesson-thumbnail">
-          <div class="lesson-overlay"><span>Биология 11 класс</span></div>
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Маргарита Фатихова</h1>
+          <p class="hero-subtitle">Преподаватель биологии | Репетитор</p>
+          <img src="./images/profile/profile.jpg" alt="Маргарита Фатихова" class="profile-image">
+          <div class="mt-4">
+            <a href="#contact" class="btn">Связаться со мной</a>
+            <a href="#pricing" class="btn btn-outline ml-3">Расценки</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-      <button class="lightbox-close" onclick="event.stopPropagation(); closeLightbox()">×</button>
-      <button class="lightbox-nav prev" onclick="event.stopPropagation(); changeLightboxImage(-1, event)">❮</button>
-      <button class="lightbox-nav next" onclick="event.stopPropagation(); changeLightboxImage(1, event)">❯</button>
-      <div class="lightbox-content">
-        <img id="lightbox-image" src="" alt="Lesson Preview">
+    <!-- About Section -->
+    <section id="about" class="py-5">
+      <div class="container">
+        <div class="section-title">
+          <h2>Обо мне</h2>
+          <p class="section-subtitle">Профессиональный опыт и образование</p>
+        </div>
+        <div class="grid grid-2">
+          <div class="about-card">
+            <h3>Образование</h3>
+            <ul>
+              <li>Магистр 2023 — Факультет педагогики КФУ</li>
+              <li>Бакалавр 2021 — Факультет биологии КФУ</li>
+              <li>Курсы повышения квалификации по подготовке к ЕГЭ</li>
+            </ul>
+          </div>
+          <div class="about-card">
+            <h3>Опыт работы</h3>
+            <ul>
+              <li>2 года преподавания в школах и лицеях</li>
+              <li>Более 2 лет репетиторского опыта</li>
+              <li>Подготовка победителей олимпиад по биологии</li>
+              <li>Работа с учениками разного уровня подготовки</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lessons Section -->
+    <section id="lessons" class="py-5 bg-light">
+      <div class="container">
+        <div class="section-title">
+          <h2>Мои занятия</h2>
+          <p class="section-subtitle">Примеры занятий и учебных материалов</p>
+        </div>
+        <div class="lessons-grid">
+          <div class="lesson-card" data-index="0">
+            <img src="./images/lessons/lesson1.jpg" alt="Биология 10 класс" class="lesson-thumbnail">
+            <div class="lesson-overlay">
+              <span>Биология 10 класс</span>
+            </div>
+          </div>
+          <div class="lesson-card" data-index="1">
+            <img src="./images/lessons/lesson2.jpg" alt="Биология 11 класс" class="lesson-thumbnail">
+            <div class="lesson-overlay">
+              <span>Биология 11 класс</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <button class="lightbox-close" aria-label="Закрыть">×</button>
+      <button class="lightbox-nav prev" aria-label="Предыдущее изображение">❮</button>
+      <button class="lightbox-nav next" aria-label="Следующее изображение">❯</button>
+      <div class="lightbox-content" onclick="event.stopPropagation()">
+        <img id="lightbox-image" src="" alt="Урок биологии">
       </div>
     </div>
 
-    <section id="pricing">
-      <h2>Тарифы</h2>
-      <p>Выберите тариф, который подходит вам</p>
-      <div class="grid pricing-grid">
-        <article class="pricing-card">
-          <h3>Одно занятие</h3>
-          <div class="price">₽2000/занятие</div>
-          <ul>
-            <li>Часовое персональное занятие</li>
-            <li>Оценка знаний</li>
-            <li>Консультация</li>
-          </ul>
-          <a href="#contact" class="pricing-cta">Выбрать тариф</a>
-        </article>
-        <article class="pricing-card popular">
-          <div class="popular-badge">Самый популярный</div>
-          <h3>Пакет из 4 занятий</h3>
-          <div class="price">₽1500/занятие</div>
-          <ul>
-            <li>Персональный план обучения</li>
-            <li>Домашние задания</li>
-            <li>Учебные материалы</li>
-            <li>Онлайн поддержка</li>
-          </ul>
-          <a href="#contact" class="pricing-cta">Выбрать тариф</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="testimonials">
-      <h2>Отзывы клиентов</h2>
-      <p>Что говорят мои ученики и их родители</p>
-      <div class="carousel">
-        <button class="carousel-button prev" aria-label="Предыдущий отзыв">❮</button>
-        <div class="carousel-container">
-          <div class="testimonials-track"></div>
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5">
+      <div class="container">
+        <div class="section-title">
+          <h2>Расценки</h2>
+          <p class="section-subtitle">Выберите тариф, который подходит именно вам</p>
         </div>
-        <button class="carousel-button next" aria-label="Следующий отзыв">❯</button>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>Разовое занятие</h3>
+            <div class="price">₽2000/занятие</div>
+            <ul>
+              <li>Персональное часовое занятие</li>
+              <li>Оценка текущего уровня знаний</li>
+              <li>Разбор сложных тем</li>
+              <li>Консультация</li>
+            </ul>
+            <a href="#contact" class="pricing-cta">Выбрать тариф</a>
+          </div>
+          <div class="pricing-card popular">
+            <div class="popular-badge">Популярный</div>
+            <h3>Пакет из 4 занятий</h3>
+            <div class="price">₽1500/занятие</div>
+            <ul>
+              <li>Персональный план обучения</li>
+              <li>Регулярные занятия</li>
+              <li>Домашние задания</li>
+              <li>Учебные материалы</li>
+              <li>Онлайн поддержка между занятиями</li>
+            </ul>
+            <a href="#contact" class="pricing-cta">Выбрать тариф</a>
+          </div>
+          <div class="pricing-card">
+            <h3>Интенсив</h3>
+            <div class="price">₽1800/занятие</div>
+            <ul>
+              <li>8 занятий в месяц</li>
+              <li>Ускоренная подготовка к экзаменам</li>
+              <li>Практика решения тестов ЕГЭ/ОГЭ</li>
+              <li>Полный комплект материалов</li>
+              <li>Регулярные проверочные работы</li>
+            </ul>
+            <a href="#contact" class="pricing-cta">Выбрать тариф</a>
+          </div>
+        </div>
       </div>
-      <div class="carousel-dots"></div>
     </section>
 
-    <section id="contact">
-      <h2>Свяжитесь со мной</h2>
-      <p>Я всегда открыта для новых возможностей и сотрудничества.</p>
-      <div class="grid contact-grid">
-        <a href="tel:+1234567890" class="contact-item"><span>📞</span><span>+7 (937) 523-02-28</span></a>
-        <a href="https://t.me/biofatikhova" class="contact-item"><span>✈️</span><span>Telegram</span></a>
-        <a href="https://instagram.com/margarita_fatikhova" class="contact-item"><span>📸</span><span>Instagram</span></a>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-light">
+      <div class="container">
+        <div class="section-title">
+          <h2>Отзывы</h2>
+          <p class="section-subtitle">Что говорят мои ученики и их родители</p>
+        </div>
+        <div class="carousel">
+          <button class="carousel-button prev" aria-label="Предыдущий отзыв">❮</button>
+          <div class="carousel-container">
+            <div class="testimonials-track"></div>
+          </div>
+          <button class="carousel-button next" aria-label="Следующий отзыв">❯</button>
+        </div>
+        <div class="carousel-dots"></div>
       </div>
     </section>
-  </div>
 
-  <script type="module" src="carousel.js"></script>
-  <script src="lightbox.js"></script>
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+      <div class="container">
+        <div class="section-title">
+          <h2>Свяжитесь со мной</h2>
+          <p class="section-subtitle">Я всегда открыта для новых возможностей и сотрудничества</p>
+        </div>
+        <div class="contact-grid">
+          <a href="tel:+79375230228" class="contact-item">
+            <span>📞</span>
+            <span>+7 (937) 523-02-28</span>
+          </a>
+          <a href="https://t.me/biofatikhova" class="contact-item">
+            <span>✈️</span>
+            <span>Telegram</span>
+          </a>
+          <a href="https://instagram.com/margarita_fatikhova" class="contact-item">
+            <span>📸</span>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>БиоФатихова</h3>
+          <p>Профессиональная подготовка по биологии для школьников и абитуриентов. Персональный подход к каждому ученику.</p>
+          <div class="social-links">
+            <a href="https://t.me/biofatikhova" class="social-link" aria-label="Telegram">✈️</a>
+            <a href="https://instagram.com/margarita_fatikhova" class="social-link" aria-label="Instagram">📸</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Навигация</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#lessons">Занятия</a></li>
+            <li><a href="#pricing">Расценки</a></li>
+            <li><a href="#testimonials">Отзывы</a></li>
+            <li><a href="#contact">Контакты</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Услуги</h3>
+          <ul class="footer-links">
+            <li>Подготовка к ЕГЭ</li>
+            <li>Подготовка к ОГЭ</li>
+            <li>Помощь школьникам</li>
+            <li>Подготовка к олимпиадам</li>
+            <li>Консультации</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 БиоФатихова. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/simple-lightbox.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
