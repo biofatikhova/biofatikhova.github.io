@@ -1,14 +1,15 @@
 /* Base settings and color variables */
 :root {
-  --primary: #007bff;
-  --primary-dark: #0056b3;
-  --secondary: #333;
-  --light: #f8f9fa;
-  --gray: #6c757d;
-  --light-gray: #e9ecef;
-  --white: #fff;
-  --highlight: #ffd700;
-  --success: #28a745;
+  /* Nature-inspired color palette */
+  --primary: #4a8054; /* Forest green - replaced blue */
+  --primary-dark: #3a6443; /* Dark forest green - for hover states */
+  --secondary: #4a4036; /* Earthy brown - replaced dark gray */
+  --light: #f9f7f4; /* Soft cream - replaced light gray */
+  --gray: #6d7566; /* Sage gray - replaced medium gray */
+  --light-gray: #e8e6e1; /* Soft stone - replaced light gray */
+  --white: #fff; /* Kept white */
+  --highlight: #e4c06e; /* Warm gold/honey - replaced bright gold */
+  --success: #5b9a6f; /* Leaf green - replaced success green */
   --shadow: 0 4px 6px rgba(0,0,0,0.1);
   --transition: all 0.3s ease;
   --border-radius: 8px;

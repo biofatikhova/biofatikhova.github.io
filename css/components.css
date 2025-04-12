@@ -5,6 +5,7 @@
   box-shadow: var(--shadow);
   padding: 2rem;
   height: 100%;
+  border-top: 3px solid var(--primary);
 }
 
 .about-card h3 {
@@ -188,14 +189,18 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  border-bottom: 3px solid var(--light-gray);
 }
 
 .pricing-card:hover {
   transform: translateY(-10px);
+  border-bottom-color: var(--primary);
 }
 
 .pricing-card.popular {
-  border: 2px solid var(--primary);
+  border: none;
+  box-shadow: 0 10px 20px rgba(74, 128, 84, 0.2);
+  background: linear-gradient(to bottom, var(--white) 90%, var(--highlight) 100%);
   transform: scale(1.03);
 }
 
@@ -396,21 +401,22 @@
 }
 
 .contact-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding: 2rem;
-  background-color: var(--white);
+  background-color: var(--light);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--secondary);
   transition: var(--transition);
+  border-left: 3px solid transparent;
 }
 
 .contact-item:hover {
-  transform: translateY(-10px);
-  background-color: var(--primary);
-  color: var(--white);
+  background-color: var(--white);
+  transform: translateY(-5px);
+  border-left-color: var(--primary);
 }
 
 .contact-item span:first-child {
