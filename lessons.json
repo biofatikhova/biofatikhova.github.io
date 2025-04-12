@@ -1,0 +1,14 @@
+{
+  "lessons": [
+    {
+      "image": "./images/lessons/lesson1.jpg",
+      "title": "Биология 10 класс",
+      "alt": "Биология 10 класс"
+    },
+    {
+      "image": "./images/lessons/lesson2.jpg",
+      "title": "Биология 11 класс",
+      "alt": "Биология 11 класс"
+    }
+  ]
+} 
