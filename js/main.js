@@ -82,10 +82,10 @@ window.addEventListener('scroll', () => {
 
 // Initialize components when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Import and initialize other modules
-  import('./carousel.js').then(module => {
-    module.initializeCarousel();
-  }).catch(err => console.error('Error loading carousel module:', err));
+  // Import and initialize testimonials
+  import('./testimonials.js').then(module => {
+    module.initializeTestimonials();
+  }).catch(err => console.error('Error loading testimonials module:', err));
   
   // Lightbox is initialized directly in its own script
   console.log('Main script loaded');
