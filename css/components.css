@@ -5,7 +5,14 @@
   box-shadow: var(--shadow);
   padding: 2rem;
   height: 100%;
-  border-top: 3px solid var(--primary);
+  border-top: 4px solid;
+  border-image: var(--gradient-primary) 1;
+  transition: var(--transition);
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
 .about-card h3 {
@@ -194,14 +201,19 @@
 
 .pricing-card:hover {
   transform: translateY(-10px);
-  border-bottom-color: var(--primary);
+  border-bottom-color: transparent;
+  border-bottom: 4px solid;
+  border-image: var(--gradient-primary) 1;
+  box-shadow: var(--shadow-lg);
 }
 
 .pricing-card.popular {
   border: none;
-  box-shadow: 0 10px 20px rgba(74, 128, 84, 0.2);
-  background: linear-gradient(to bottom, var(--white) 90%, var(--highlight) 100%);
+  box-shadow: 0 10px 25px rgba(74, 128, 84, 0.15);
+  background: linear-gradient(to bottom, var(--white) 85%, var(--primary-light) 100%);
   transform: scale(1.03);
+  border-bottom: 4px solid;
+  border-image: var(--gradient-primary) 1;
 }
 
 .pricing-card.popular:hover {
@@ -274,6 +286,8 @@
   gap: 2rem;
   max-width: 900px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .testimonial-card {
@@ -292,6 +306,8 @@
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 2;
 }
 
 .testimonials-toggle-btn {
@@ -392,7 +408,7 @@
 }
 
 .contact-item {
-  background-color: var(--light);
+  background: linear-gradient(135deg, var(--white) 0%, var(--primary-light) 100%);
   border-radius: var(--border-radius);
   padding: 1.5rem;
   display: flex;
@@ -401,13 +417,18 @@
   gap: 1rem;
   color: var(--secondary);
   transition: var(--transition);
-  border-left: 3px solid transparent;
+  border-left: 4px solid transparent;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1;
 }
 
 .contact-item:hover {
-  background-color: var(--white);
+  background: var(--gradient-primary);
+  color: var(--white);
   transform: translateY(-5px);
-  border-left-color: var(--primary);
+  border-left-color: transparent;
+  box-shadow: var(--shadow-lg);
 }
 
 .contact-icon-img {
@@ -421,7 +442,7 @@
 }
 
 .contact-item:hover span {
-  color: var(--primary);
+  color: var(--white);
 }
 
 /* Mobile responsive */

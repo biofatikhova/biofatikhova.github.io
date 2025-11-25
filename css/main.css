@@ -1,18 +1,28 @@
 /* Base settings and color variables */
 :root {
   /* Nature-inspired color palette */
-  --primary: #4a8054; /* Forest green - replaced blue */
+  --primary: #4a8054; /* Forest green */
   --primary-dark: #3a6443; /* Dark forest green - for hover states */
-  --secondary: #4a4036; /* Earthy brown - replaced dark gray */
-  --light: #f9f7f4; /* Soft cream - replaced light gray */
-  --gray: #6d7566; /* Sage gray - replaced medium gray */
-  --light-gray: #e8e6e1; /* Soft stone - replaced light gray */
-  --white: #fff; /* Kept white */
-  --highlight: #e4c06e; /* Warm gold/honey - replaced bright gold */
-  --success: #5b9a6f; /* Leaf green - replaced success green */
+  --primary-light: #e8f5ea; /* Light green tint */
+  --secondary: #4a4036; /* Earthy brown */
+  --accent: #5b9a6f; /* Leaf green accent */
+  --accent-light: #f0f7f2; /* Light green tint */
+  --light: #f9f7f4; /* Soft cream */
+  --gray: #6d7566; /* Sage gray */
+  --light-gray: #e8e6e1; /* Soft stone */
+  --white: #fff;
+  --highlight: #e4c06e; /* Warm gold/honey */
+  --success: #5b9a6f; /* Leaf green */
   --shadow: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
   --transition: all 0.3s ease;
   --border-radius: 8px;
+  
+  /* Gradient definitions */
+  --gradient-primary: linear-gradient(135deg, #4a8054 0%, #5b9a6f 100%);
+  --gradient-hero: linear-gradient(135deg, #e8f5ea 0%, #f9f7f4 50%, #f0f7f2 100%);
+  --gradient-section: linear-gradient(180deg, #ffffff 0%, #f9f7f4 100%);
+  --gradient-accent: linear-gradient(135deg, #5b9a6f 0%, #4a8054 100%);
 }
 
 /* Reset and base styles */
@@ -30,7 +40,9 @@ body {
   font-family: 'Roboto', 'Arial', sans-serif;
   line-height: 1.6;
   color: var(--secondary);
-  background-color: var(--light);
+  background: linear-gradient(135deg, #f0f7f2 0%, #f9f7f4 50%, #f5f9f7 100%);
+  min-height: 100vh;
+  position: relative;
 }
 
 img {
@@ -127,6 +139,7 @@ ul, ol {
 /* Section spacing */
 section {
   padding: 5rem 0;
+  background: transparent;
 }
 
 @media (max-width: 768px) {

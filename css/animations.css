@@ -1,0 +1,119 @@
+/* Biology Background Icons Animation */
+
+.bio-background-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 500vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.bio-icon {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.15;
+  animation: floatRotate 20s infinite ease-in-out;
+  filter: blur(0.5px);
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  contain: layout style paint;
+}
+
+@keyframes floatRotate {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% {
+    transform: translate3d(15px, -20px, 0) rotate(90deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate3d(-10px, -30px, 0) rotate(180deg);
+    opacity: 0.15;
+  }
+  75% {
+    transform: translate3d(20px, -15px, 0) rotate(270deg);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(360deg);
+    opacity: 0.1;
+  }
+}
+
+/* Ensure content is above background icons */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure testimonials section allows icons to show through gaps */
+#testimonials {
+  position: relative;
+  z-index: 1;
+}
+
+#testimonials .container {
+  position: relative;
+  z-index: 1;
+}
+
+.testimonials-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Adjust icons for smaller screens - keep all icons visible */
+@media (max-width: 768px) {
+  .bio-icon {
+    font-size: 1.6rem;
+    opacity: 0.2;
+    filter: blur(0.3px);
+    animation-duration: 25s;
+  }
+  
+  .bio-background-icons {
+    min-height: 500vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .bio-icon {
+    font-size: 1.5rem;
+    opacity: 0.18;
+    filter: blur(0.2px);
+    animation-duration: 30s;
+  }
+  
+  .bio-background-icons {
+    min-height: 500vh;
+  }
+}
