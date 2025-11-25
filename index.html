@@ -20,9 +20,6 @@
   <header class="header">
     <div class="container navbar">
       <a href="#" class="brand">БиоФатихова</a>
-      <button class="mobile-toggle" aria-label="Toggle navigation">
-        <span>☰</span>
-      </button>
       <nav class="nav-menu">
         <a href="#home" class="nav-link active">Главная</a>
         <a href="#about" class="nav-link">Обо мне</a>
@@ -31,6 +28,17 @@
         <a href="#testimonials" class="nav-link">Отзывы</a>
         <a href="#contact" class="nav-link">Контакты</a>
       </nav>
+      <div class="header-social">
+        <a href="https://t.me/biofatikhova" class="header-social-link" aria-label="Telegram">
+          <img src="./images/icons/telegram.svg" alt="Telegram" class="header-social-icon">
+        </a>
+        <a href="https://instagram.com/margarita_fatikhova" class="header-social-link" aria-label="Instagram">
+          <img src="./images/icons/instagram.svg" alt="Instagram" class="header-social-icon">
+        </a>
+      </div>
+      <button class="mobile-toggle" aria-label="Toggle navigation">
+        <span>☰</span>
+      </button>
     </div>
   </header>
 
@@ -39,12 +47,27 @@
     <section id="home" class="hero">
       <div class="container">
         <div class="hero-content">
-          <h1 class="hero-title">Маргарита Фатихова</h1>
-          <p class="hero-subtitle">Преподаватель биологии | Репетитор</p>
-          <img src="./images/profile/profile.jpg" alt="Маргарита Фатихова" class="profile-image">
-          <div class="mt-4">
-            <a href="#contact" class="btn">Связаться со мной</a>
-            <a href="#pricing" class="btn btn-outline ml-3">Стоимость занятий</a>
+          <div class="hero-left">
+            <h1 class="hero-title">Преподаватель биологии</h1>
+            <p class="hero-name">Маргарита Фатихова</p>
+            <div class="hero-social">
+              <a href="https://t.me/biofatikhova" class="hero-social-link" aria-label="Telegram">
+                <img src="./images/icons/telegram.svg" alt="Telegram" class="social-icon">
+              </a>
+              <a href="https://instagram.com/margarita_fatikhova" class="hero-social-link" aria-label="Instagram">
+                <img src="./images/icons/instagram.svg" alt="Instagram" class="social-icon">
+              </a>
+            </div>
+            <div class="hero-buttons">
+              <a href="#pricing" class="btn">Стоимость занятий</a>
+              <a href="https://profi.ru/profile/FatihovaMA/" class="btn btn-profi" target="_blank" rel="noopener">
+                <span>профи.ру</span>
+                <span class="profi-rating">⭐ 5.0</span>
+              </a>
+            </div>
+          </div>
+          <div class="hero-right">
+            <img src="./images/profile/profile.jpg" alt="Маргарита Фатихова" class="profile-image">
           </div>
         </div>
       </div>
@@ -173,16 +196,12 @@
           <p class="section-subtitle">Я всегда открыта для новых возможностей и сотрудничества</p>
         </div>
         <div class="contact-grid">
-          <a href="tel:+79375230228" class="contact-item">
-            <span>📞</span>
-            <span>+7 (937) 523-02-28</span>
-          </a>
           <a href="https://t.me/biofatikhova" class="contact-item">
-            <span>✈️</span>
+            <img src="./images/icons/telegram.svg" alt="Telegram" class="contact-icon-img">
             <span>Telegram</span>
           </a>
           <a href="https://instagram.com/margarita_fatikhova" class="contact-item">
-            <span>📸</span>
+            <img src="./images/icons/instagram.svg" alt="Instagram" class="contact-icon-img">
             <span>Instagram</span>
           </a>
         </div>
@@ -198,8 +217,12 @@
           <h3>БиоФатихова</h3>
           <p>Профессиональная подготовка по биологии для школьников и абитуриентов. Персональный подход к каждому ученику.</p>
           <div class="social-links">
-            <a href="https://t.me/biofatikhova" class="social-link" aria-label="Telegram">✈️</a>
-            <a href="https://instagram.com/margarita_fatikhova" class="social-link" aria-label="Instagram">📸</a>
+            <a href="https://t.me/biofatikhova" class="social-link" aria-label="Telegram">
+              <img src="./images/icons/telegram.svg" alt="Telegram" class="footer-social-icon">
+            </a>
+            <a href="https://instagram.com/margarita_fatikhova" class="social-link" aria-label="Instagram">
+              <img src="./images/icons/instagram.svg" alt="Instagram" class="footer-social-icon">
+            </a>
           </div>
         </div>
         <div class="footer-col">

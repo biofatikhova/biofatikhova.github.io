@@ -410,11 +410,13 @@
   border-left-color: var(--primary);
 }
 
-.contact-item span:first-child {
-  font-size: 2rem;
+.contact-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
-.contact-item span:last-child {
+.contact-item span {
   font-weight: 500;
 }
 
