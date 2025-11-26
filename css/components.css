@@ -192,6 +192,26 @@
   margin: 0 auto;
 }
 
+.consultation-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%);
+  border-radius: var(--border-radius);
+  margin: -2rem auto 2.5rem;
+  max-width: 600px;
+  font-size: 0.95rem;
+  color: var(--secondary);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(74, 128, 84, 0.1);
+}
+
+.consultation-icon {
+  font-size: 1.2rem;
+}
+
 .pricing-card {
   background-color: var(--white);
   border-radius: var(--border-radius);

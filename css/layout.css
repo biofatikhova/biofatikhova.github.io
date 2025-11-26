@@ -205,6 +205,14 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.hero-consultation {
+  font-size: 0.9rem;
+  color: var(--gray);
+  font-style: italic;
+  margin-top: 0.5rem;
 }
 
 .btn-profi {
