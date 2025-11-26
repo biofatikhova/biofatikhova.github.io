@@ -52,8 +52,10 @@
 /* Lesson cards */
 .lessons-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .lesson-card {
@@ -184,6 +186,12 @@
   gap: 2rem;
 }
 
+.pricing-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .pricing-card {
   background-color: var(--white);
   border-radius: var(--border-radius);
@@ -249,13 +257,28 @@
   background: linear-gradient(135deg, rgba(74, 128, 84, 0.9) 0%, rgba(91, 154, 111, 0.9) 100%);
   color: var(--white);
   padding: 0.5rem 1.25rem;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   z-index: 10;
+  white-space: nowrap;
+}
+
+.price-original {
+  font-size: 1.1rem;
+  color: var(--gray);
+  text-decoration: line-through;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.total-price {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
 }
 
 .pricing-card h3 {
@@ -497,6 +520,29 @@
   .pricing-grid,
   .contact-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .pricing-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 100%;
+  }
+  
+  .pricing-card {
+    margin-bottom: 0;
+  }
+  
+  .pricing-card.popular {
+    transform: scale(1);
+  }
+  
+  .pricing-card.popular:hover {
+    transform: translateY(-10px);
+  }
+  
+  .lessons-grid {
+    max-width: 100%;
   }
   
   .testimonials-grid {
