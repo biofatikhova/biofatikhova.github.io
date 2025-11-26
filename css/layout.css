@@ -101,12 +101,13 @@
 
 /* Hero section */
 .hero {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   align-items: center;
   background: transparent;
   position: relative;
-  padding-top: 6rem;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
   overflow: hidden;
 }
 
@@ -152,6 +153,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: flex-start;
 }
 
 .hero-title {
@@ -162,17 +164,26 @@
   line-height: 1.2;
 }
 
+.hero-name-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
 .hero-name {
   font-size: 1.2rem;
   color: var(--secondary);
-  margin-bottom: 1rem;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .hero-social {
-  margin-bottom: 1.25rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .hero-social-link {
@@ -201,18 +212,63 @@
   object-fit: contain;
 }
 
+.hero-consultation-banner {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 1.75rem;
+  background: linear-gradient(135deg, var(--white) 0%, var(--primary-light) 100%);
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(74, 128, 84, 0.2), 0 0 0 3px rgba(74, 128, 84, 0.1);
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hero-consultation-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+}
+
+.consultation-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.consultation-highlight {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.consultation-main {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--secondary);
+  line-height: 1.3;
+}
+
+.consultation-sub {
+  font-size: 0.85rem;
+  color: var(--gray);
+  font-weight: 500;
+}
+
 .hero-buttons {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.hero-consultation {
-  font-size: 0.9rem;
-  color: var(--gray);
-  font-style: italic;
-  margin-top: 0.5rem;
 }
 
 .btn-profi {
