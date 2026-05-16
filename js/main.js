@@ -6,87 +6,108 @@
 const header = document.querySelector('.header');
 const mobileToggle = document.querySelector('.mobile-toggle');
 const navMenu = document.querySelector('.nav-menu');
+const sections = document.querySelectorAll('section[id]');
 
-// Mobile Menu Toggle
-if (mobileToggle) {
-  mobileToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    mobileToggle.classList.toggle('active');
+function setMobileMenuOpen(isOpen) {
+  if (!navMenu || !mobileToggle) return;
+
+  navMenu.classList.toggle('active', isOpen);
+  mobileToggle.classList.toggle('active', isOpen);
+  mobileToggle.setAttribute('aria-expanded', String(isOpen));
+  mobileToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+}
+
+function getHeaderHeight() {
+  return header?.offsetHeight || 0;
+}
+
+function updateHeaderState() {
+  if (header) {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  }
+
+  const scrollY = window.pageYOffset;
+  const headerHeight = getHeaderHeight();
+  let activeSectionId = null;
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - headerHeight - 100;
+    if (scrollY >= sectionTop) {
+      activeSectionId = section.getAttribute('id');
+    }
+  });
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === `#${activeSectionId}`);
   });
 }
 
-// Close mobile menu when clicking outside
+// Mobile Menu Toggle
+mobileToggle?.addEventListener('click', () => {
+  setMobileMenuOpen(!navMenu?.classList.contains('active'));
+});
+
+// Close mobile menu when clicking outside or pressing Escape
 document.addEventListener('click', (e) => {
-  if (navMenu && navMenu.classList.contains('active') && 
-      !navMenu.contains(e.target) && 
-      !mobileToggle.contains(e.target)) {
-    navMenu.classList.remove('active');
-    mobileToggle.classList.remove('active');
+  if (!navMenu?.classList.contains('active')) return;
+
+  if (!navMenu.contains(e.target) && !mobileToggle?.contains(e.target)) {
+    setMobileMenuOpen(false);
   }
 });
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navMenu?.classList.contains('active')) {
+    setMobileMenuOpen(false);
   }
 });
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    // Close mobile menu if open
-    if (navMenu && navMenu.classList.contains('active')) {
-      navMenu.classList.remove('active');
-      mobileToggle.classList.remove('active');
-    }
-
     const targetId = this.getAttribute('href');
-    const targetElement = document.querySelector(targetId);
-    
-    if (targetElement) {
-      const headerOffset = document.querySelector('.header').offsetHeight;
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    if (!targetId || targetId.length <= 1) return;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    const targetElement = document.getElementById(targetId.slice(1));
+    if (!targetElement) return;
+
+    e.preventDefault();
+    setMobileMenuOpen(false);
+
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - getHeaderHeight();
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
   });
 });
 
-// Update active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
+// Update header and active nav link on scroll without doing layout work for every event.
+let scrollTicking = false;
 window.addEventListener('scroll', () => {
-  const scrollY = window.pageYOffset;
-  const headerHeight = document.querySelector('.header').offsetHeight;
-  
-  sections.forEach(current => {
-    const sectionHeight = current.offsetHeight;
-    const sectionTop = current.offsetTop - headerHeight - 100;
-    const sectionId = current.getAttribute('id');
-    
-    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-      document.querySelector(`.nav-link[href="#${sectionId}"]`)?.classList.add('active');
-    } else {
-      document.querySelector(`.nav-link[href="#${sectionId}"]`)?.classList.remove('active');
-    }
+  if (scrollTicking) return;
+
+  window.requestAnimationFrame(() => {
+    updateHeaderState();
+    scrollTicking = false;
   });
-});
+  scrollTicking = true;
+}, { passive: true });
 
 // Initialize components when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+function initializePage() {
+  updateHeaderState();
+
   // Import and initialize testimonials
   import('./testimonials.js').then(module => {
     module.initializeTestimonials();
   }).catch(err => console.error('Error loading testimonials module:', err));
-  
-  // Lightbox is initialized directly in its own script
-  console.log('Main script loaded');
-}); 
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializePage);
+} else {
+  initializePage();
+}

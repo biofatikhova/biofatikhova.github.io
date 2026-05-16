@@ -1,80 +1,85 @@
 /**
- * Dynamic Lightbox Implementation
- * Loads lesson data from JSON and creates lightbox functionality
+ * Dynamic lessons gallery and lightbox.
  */
 
-// Will store lesson data loaded from JSON
+const FALLBACK_LESSONS = [
+  {
+    image: './images/lessons/lesson1.jpg',
+    title: 'Биология 10 класс',
+    alt: 'Биология 10 класс'
+  },
+  {
+    image: './images/lessons/lesson2.jpg',
+    title: 'Биология 11 класс',
+    alt: 'Биология 11 класс'
+  }
+];
+
 let lessonData = [];
 let lessonImages = [];
 let currentImageIndex = 0;
 
-// DOM References
-let lightbox, lightboxImage, closeBtn, prevBtn, nextBtn;
+let lightbox;
+let lightboxImage;
+let closeBtn;
+let prevBtn;
+let nextBtn;
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', async function() {
-  console.log('Dynamic lightbox script loading...');
-  
-  // Load lessons from JSON file
-  try {
-    await loadLessonsFromJSON();
-  } catch (error) {
-    console.error('Error loading lessons:', error);
-  }
-  
-  // Get DOM elements
+document.addEventListener('DOMContentLoaded', initializeLessonsGallery);
+
+async function initializeLessonsGallery() {
   lightbox = document.getElementById('lightbox');
   lightboxImage = document.getElementById('lightbox-image');
   closeBtn = document.querySelector('.lightbox-close');
   prevBtn = document.querySelector('.lightbox-nav.prev');
   nextBtn = document.querySelector('.lightbox-nav.next');
-  
-  // Lightbox background click to close
-  if (lightbox) {
-    lightbox.addEventListener('click', function() {
-      closeLightbox();
-    });
+
+  lessonData = await loadLessonsFromJSON();
+  lessonImages = lessonData.map(lesson => lesson.image).filter(Boolean);
+  renderLessonCards();
+  bindLightboxControls();
+}
+
+async function loadLessonsFromJSON() {
+  try {
+    const response = await fetch('./lessons.json');
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+    const data = await response.json();
+    const lessons = Array.isArray(data.lessons) ? data.lessons : [];
+    return lessons.length > 0 ? lessons : FALLBACK_LESSONS;
+  } catch (error) {
+    console.error('Error loading lessons data:', error);
+    return FALLBACK_LESSONS;
   }
-  
-  // Close button
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      closeLightbox();
-    });
-  }
-  
-  // Previous button
-  if (prevBtn) {
-    prevBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      navigateImage(-1);
-    });
-  }
-  
-  // Next button
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      navigateImage(1);
-    });
-  }
-  
-  // Prevent clicks on lightbox content from closing it
-  const lightboxContent = document.querySelector('.lightbox-content');
-  if (lightboxContent) {
-    lightboxContent.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-  }
-  
-  // Keyboard navigation
-  document.addEventListener('keydown', function(e) {
-    if (!lightbox || !lightbox.classList.contains('active')) {
-      return;
-    }
-    
-    switch (e.key) {
+}
+
+function bindLightboxControls() {
+  lightbox?.addEventListener('click', closeLightbox);
+
+  closeBtn?.addEventListener('click', event => {
+    event.stopPropagation();
+    closeLightbox();
+  });
+
+  prevBtn?.addEventListener('click', event => {
+    event.stopPropagation();
+    navigateImage(-1);
+  });
+
+  nextBtn?.addEventListener('click', event => {
+    event.stopPropagation();
+    navigateImage(1);
+  });
+
+  document.querySelector('.lightbox-content')?.addEventListener('click', event => {
+    event.stopPropagation();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!lightbox?.classList.contains('active')) return;
+
+    switch (event.key) {
       case 'Escape':
         closeLightbox();
         break;
@@ -84,136 +89,84 @@ document.addEventListener('DOMContentLoaded', async function() {
       case 'ArrowRight':
         navigateImage(1);
         break;
+      default:
+        break;
     }
   });
-  
-  console.log('Dynamic lightbox initialized with elements:', {
-    lightbox: !!lightbox,
-    lightboxImage: !!lightboxImage,
-    closeBtn: !!closeBtn,
-    prevBtn: !!prevBtn,
-    nextBtn: !!nextBtn,
-    lessonsLoaded: lessonData.length
-  });
-});
-
-/**
- * Load lessons data from JSON and render lesson cards
- */
-async function loadLessonsFromJSON() {
-  try {
-    const response = await fetch('./lessons.json');
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    lessonData = data.lessons || [];
-    
-    // Extract image paths for the lightbox
-    lessonImages = lessonData.map(lesson => lesson.image);
-    
-    // Render lesson cards
-    renderLessonCards();
-    
-    console.log(`Loaded ${lessonData.length} lessons from JSON`);
-  } catch (error) {
-    console.error('Error loading lessons data:', error);
-    // Fallback to default images if JSON fails to load
-    lessonImages = ['./images/lessons/lesson1.jpg', './images/lessons/lesson2.jpg'];
-  }
 }
 
-/**
- * Render lesson cards in the lessons grid
- */
 function renderLessonCards() {
   const lessonsGrid = document.getElementById('lessons-grid');
-  if (!lessonsGrid || lessonData.length === 0) {
-    return;
-  }
-  
-  // Clear existing content
+  if (!lessonsGrid) return;
+
   lessonsGrid.innerHTML = '';
-  
-  // Add lesson cards
+
   lessonData.forEach((lesson, index) => {
     const lessonCard = document.createElement('div');
+    const lessonImage = document.createElement('img');
+    const lessonOverlay = document.createElement('div');
+    const lessonTitle = document.createElement('span');
+
     lessonCard.className = 'lesson-card';
-    lessonCard.dataset.index = index;
-    
-    lessonCard.innerHTML = `
-      <img src="${lesson.image}" alt="${lesson.alt}" class="lesson-thumbnail">
-      <div class="lesson-overlay">
-        <span>${lesson.title}</span>
-      </div>
-    `;
-    
-    // Add click event listener
-    lessonCard.addEventListener('click', () => {
+    lessonCard.dataset.index = String(index);
+    lessonCard.tabIndex = 0;
+    lessonCard.role = 'button';
+    lessonCard.setAttribute('aria-label', `Открыть материал: ${lesson.title || lesson.alt || 'урок биологии'}`);
+
+    lessonImage.src = lesson.image;
+    lessonImage.alt = lesson.alt || lesson.title || 'Урок биологии';
+    lessonImage.className = 'lesson-thumbnail';
+    lessonImage.loading = 'lazy';
+    lessonImage.decoding = 'async';
+
+    lessonOverlay.className = 'lesson-overlay';
+    lessonTitle.textContent = lesson.title || '';
+
+    lessonOverlay.appendChild(lessonTitle);
+    lessonCard.append(lessonImage, lessonOverlay);
+
+    lessonCard.addEventListener('click', () => openLightbox(index));
+    lessonCard.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+
+      event.preventDefault();
       openLightbox(index);
     });
-    
+
     lessonsGrid.appendChild(lessonCard);
   });
 }
 
-/**
- * Open lightbox with specified image index
- */
 function openLightbox(index) {
-  console.log('Opening lightbox with image index:', index);
-  
-  if (!lightbox || !lightboxImage || lessonImages.length === 0) {
-    console.error('Lightbox elements not found or no lesson images available');
-    return;
-  }
-  
+  if (!lightbox || !lightboxImage || !lessonImages[index]) return;
+
   currentImageIndex = index;
-  
   lightboxImage.src = lessonImages[index];
-  
-  if (lessonData[index] && lessonData[index].alt) {
-    lightboxImage.alt = lessonData[index].alt;
-  }
-  
+  lightboxImage.alt = lessonData[index]?.alt || lessonData[index]?.title || 'Урок биологии';
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
+  closeBtn?.focus();
 }
 
-/**
- * Close lightbox
- */
 function closeLightbox() {
-  console.log('Closing lightbox');
-  
-  if (!lightbox) {
-    return;
-  }
-  
+  if (!lightbox) return;
+
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
 }
 
-/**
- * Navigate to next/previous image
- */
 function navigateImage(direction) {
-  console.log('Navigating image with direction:', direction);
-  
-  if (!lightboxImage || lessonImages.length === 0) {
-    return;
-  }
-  
+  if (!lightboxImage || lessonImages.length === 0) return;
+
   currentImageIndex = (currentImageIndex + direction + lessonImages.length) % lessonImages.length;
   lightboxImage.src = lessonImages[currentImageIndex];
-  
-  if (lessonData[currentImageIndex] && lessonData[currentImageIndex].alt) {
-    lightboxImage.alt = lessonData[currentImageIndex].alt;
-  }
+  lightboxImage.alt = lessonData[currentImageIndex]?.alt || lessonData[currentImageIndex]?.title || 'Урок биологии';
 }
 
-// Global exports for compatibility
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
-window.navigateImage = navigateImage; 
+window.navigateImage = navigateImage;
+window.changeLightboxImage = (direction, event) => {
+  event?.stopPropagation();
+  navigateImage(direction);
+};

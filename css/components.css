@@ -72,6 +72,10 @@
   transform: translateY(-5px);
 }
 
+.lesson-card:focus-visible {
+  transform: translateY(-5px);
+}
+
 .lesson-thumbnail {
   width: 100%;
   height: 100%;
@@ -484,12 +488,14 @@
 }
 
 .read-more-btn {
+  border: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
   color: var(--primary);
   cursor: pointer;
+  font: inherit;
   font-weight: 600;
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
@@ -608,4 +614,4 @@
   .testimonials-grid {
     max-width: 100%;
   }
-} 
+}

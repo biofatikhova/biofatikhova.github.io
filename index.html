@@ -7,9 +7,11 @@
   <title>БиоФатихова - Репетитор по биологии</title>
   
   <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/icons/favicon.svg" type="image/svg+xml">
   
   <!-- CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -24,8 +26,8 @@
   <!-- Header -->
   <header class="header">
     <div class="container navbar">
-      <a href="#" class="brand">БиоФатихова</a>
-      <nav class="nav-menu">
+      <a href="#home" class="brand">БиоФатихова</a>
+      <nav class="nav-menu" id="primary-navigation">
         <a href="#home" class="nav-link active">Главная</a>
         <a href="#about" class="nav-link">Обо мне</a>
         <a href="#lessons" class="nav-link">Занятия</a>
@@ -34,14 +36,14 @@
         <a href="#contact" class="nav-link">Контакты</a>
       </nav>
       <div class="header-social">
-        <a href="https://t.me/biofatikhova" class="header-social-link" aria-label="Telegram">
-          <img src="./images/icons/telegram.svg" alt="Telegram" class="header-social-icon">
+        <a href="https://t.me/biofatikhova" class="header-social-link" aria-label="Telegram" target="_blank" rel="noopener">
+          <img src="./images/icons/telegram.svg" alt="" class="header-social-icon" aria-hidden="true">
         </a>
-        <a href="https://instagram.com/margarita_fatikhova" class="header-social-link" aria-label="Instagram">
-          <img src="./images/icons/instagram.svg" alt="Instagram" class="header-social-icon">
+        <a href="https://instagram.com/margarita_fatikhova" class="header-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+          <img src="./images/icons/instagram.svg" alt="" class="header-social-icon" aria-hidden="true">
         </a>
       </div>
-      <button class="mobile-toggle" aria-label="Toggle navigation">
+      <button class="mobile-toggle" type="button" aria-label="Открыть меню" aria-controls="primary-navigation" aria-expanded="false">
         <span>☰</span>
       </button>
     </div>
@@ -57,11 +59,11 @@
             <div class="hero-name-row">
               <p class="hero-name">Маргарита Фатихова</p>
               <div class="hero-social">
-                <a href="https://t.me/biofatikhova" class="hero-social-link" aria-label="Telegram">
-                  <img src="./images/icons/telegram.svg" alt="Telegram" class="social-icon">
+                <a href="https://t.me/biofatikhova" class="hero-social-link" aria-label="Telegram" target="_blank" rel="noopener">
+                  <img src="./images/icons/telegram.svg" alt="" class="social-icon" aria-hidden="true">
                 </a>
-                <a href="https://instagram.com/margarita_fatikhova" class="hero-social-link" aria-label="Instagram">
-                  <img src="./images/icons/instagram.svg" alt="Instagram" class="social-icon">
+                <a href="https://instagram.com/margarita_fatikhova" class="hero-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                  <img src="./images/icons/instagram.svg" alt="" class="social-icon" aria-hidden="true">
                 </a>
               </div>
             </div>
@@ -81,7 +83,7 @@
             </div>
           </div>
           <div class="hero-right">
-            <img src="./images/profile/profile.jpg" alt="Маргарита Фатихова" class="profile-image">
+            <img src="./images/profile/profile.jpg" alt="Маргарита Фатихова" class="profile-image" width="280" height="280" fetchpriority="high" decoding="async">
           </div>
         </div>
       </div>
@@ -129,11 +131,11 @@
     </section>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр материала занятия">
       <button class="lightbox-close" aria-label="Закрыть">×</button>
       <button class="lightbox-nav prev" aria-label="Предыдущее изображение">❮</button>
       <button class="lightbox-nav next" aria-label="Следующее изображение">❯</button>
-      <div class="lightbox-content" onclick="event.stopPropagation()">
+      <div class="lightbox-content">
         <img id="lightbox-image" src="" alt="Урок биологии">
       </div>
     </div>
@@ -196,7 +198,7 @@
         <div class="testimonials-grid reviews-list--collapsed" id="testimonials-grid">
           <!-- Testimonials will be dynamically loaded here -->
         </div>
-        <button class="testimonials-toggle-btn" id="testimonials-toggle-btn" style="display: none;">
+        <button class="testimonials-toggle-btn" id="testimonials-toggle-btn" type="button" aria-controls="testimonials-grid" aria-expanded="false" style="display: none;">
           Показать ещё отзывы
         </button>
       </div>
@@ -210,12 +212,12 @@
           <p class="section-subtitle">Буду рада ответить на ваши вопросы и обсудить формат занятий</p>
         </div>
         <div class="contact-grid">
-          <a href="https://t.me/biofatikhova" class="contact-item">
-            <img src="./images/icons/telegram.svg" alt="Telegram" class="contact-icon-img">
+          <a href="https://t.me/biofatikhova" class="contact-item" target="_blank" rel="noopener">
+            <img src="./images/icons/telegram.svg" alt="" class="contact-icon-img" aria-hidden="true">
             <span>Telegram</span>
           </a>
-          <a href="https://instagram.com/margarita_fatikhova" class="contact-item">
-            <img src="./images/icons/instagram.svg" alt="Instagram" class="contact-icon-img">
+          <a href="https://instagram.com/margarita_fatikhova" class="contact-item" target="_blank" rel="noopener">
+            <img src="./images/icons/instagram.svg" alt="" class="contact-icon-img" aria-hidden="true">
             <span>Instagram</span>
           </a>
         </div>
@@ -232,11 +234,11 @@
           <p>Репетитор по биологии.</p>
           <p>Подготовка к экзаменам и повышение успеваемости.</p>
           <div class="social-links">
-            <a href="https://t.me/biofatikhova" class="social-link" aria-label="Telegram">
-              <img src="./images/icons/telegram.svg" alt="Telegram" class="footer-social-icon">
+            <a href="https://t.me/biofatikhova" class="social-link" aria-label="Telegram" target="_blank" rel="noopener">
+              <img src="./images/icons/telegram.svg" alt="" class="footer-social-icon" aria-hidden="true">
             </a>
-            <a href="https://instagram.com/margarita_fatikhova" class="social-link" aria-label="Instagram">
-              <img src="./images/icons/instagram.svg" alt="Instagram" class="footer-social-icon">
+            <a href="https://instagram.com/margarita_fatikhova" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+              <img src="./images/icons/instagram.svg" alt="" class="footer-social-icon" aria-hidden="true">
             </a>
           </div>
         </div>

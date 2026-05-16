@@ -8,7 +8,7 @@
   min-height: 500vh;
   pointer-events: none;
   z-index: 0;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .bio-icon {
@@ -48,15 +48,14 @@
   }
 }
 
-/* Ensure content is above background icons */
+/* Keep page content positioned without trapping fixed overlays below the header. */
 main {
   position: relative;
-  z-index: 1;
+  z-index: auto;
 }
 
 .header {
-  position: relative;
-  z-index: 1;
+  z-index: 1000;
 }
 
 section {
@@ -115,5 +114,11 @@ section .container {
   
   .bio-background-icons {
     min-height: 500vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bio-icon {
+    animation: none;
   }
 }

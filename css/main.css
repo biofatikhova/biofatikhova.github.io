@@ -43,6 +43,7 @@ body {
   background: linear-gradient(135deg, #f0f7f2 0%, #f9f7f4 50%, #f5f9f7 100%);
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
 }
 
 img {
@@ -58,6 +59,13 @@ a {
 
 a:hover {
   color: var(--primary-dark);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid rgba(74, 128, 84, 0.45);
+  outline-offset: 3px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -163,4 +171,4 @@ section#about {
 
 .card:hover {
   transform: translateY(-5px);
-} 
+}
