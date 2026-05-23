@@ -158,6 +158,15 @@ p { margin: 0; }
   margin-top: var(--s-4);
   text-wrap: balance;
 }
+.section-lead a {
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.section-lead a:hover {
+  color: var(--clay);
+}
 
 .section-marker {
   display: flex;
