@@ -749,9 +749,10 @@
 .contact-card {
   position: relative;
   display: grid;
-  grid-template-columns: 36px 1fr 36px;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
   align-items: center;
   gap: var(--s-4);
+  min-width: 0;
   padding: var(--s-6);
   background: var(--shell);
   border: 1px solid var(--line);
@@ -781,7 +782,12 @@
 }
 .contact-card--primary .contact-card-num { color: var(--leaf-bright); }
 .contact-card:hover .contact-card-num { transform: translateX(4px); }
-.contact-card-body { display: flex; flex-direction: column; gap: 2px; }
+.contact-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
 .contact-card-label {
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -796,11 +802,13 @@
   font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 500;
   letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
 }
 .contact-card-meta {
   font-size: 0.85rem;
   color: var(--ink-faint);
   margin-top: 2px;
+  overflow-wrap: anywhere;
 }
 .contact-card--primary .contact-card-meta { color: rgba(242, 237, 224, 0.7); }
 .contact-card-icon {
@@ -813,7 +821,17 @@
 }
 
 @media (max-width: 640px) {
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .contact-card {
+    grid-template-columns: 32px minmax(0, 1fr) 28px;
+    gap: var(--s-3);
+    padding: var(--s-5);
+  }
+  .contact-card-icon {
+    width: 22px;
+    height: 22px;
+    justify-self: end;
+  }
 }
 
 /* ============ Sticky CTA ============ */
