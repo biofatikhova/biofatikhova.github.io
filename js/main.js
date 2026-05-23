@@ -1,147 +1,91 @@
 /**
- * Main JavaScript file
+ * Site behavior: header scroll state, mobile nav, active section highlight,
+ * scroll-reveal, sticky CTA visibility.
  */
+(function () {
+  const header = document.querySelector('.site-header');
+  const nav = document.getElementById('primary-navigation');
+  const toggle = document.querySelector('.mobile-toggle');
+  const navLinks = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
+  const stickyCta = document.querySelector('.sticky-cta');
+  const hero = document.getElementById('home');
 
-// DOM Elements
-const header = document.querySelector('.header');
-const mobileToggle = document.querySelector('.mobile-toggle');
-const navMenu = document.querySelector('.nav-menu');
-const sections = [...document.querySelectorAll('section[id]')].filter(section =>
-  document.querySelector(`.nav-link[href="#${section.id}"]`)
-);
-const stickyTelegramCta = document.querySelector('.sticky-telegram-cta');
-const contactSection = document.getElementById('contact');
-const footer = document.querySelector('.footer');
+  /* ----- header scroll state ----- */
+  const onScroll = () => {
+    const y = window.scrollY;
+    if (header) header.classList.toggle('is-scrolled', y > 16);
 
-function setMobileMenuOpen(isOpen) {
-  if (!navMenu || !mobileToggle) return;
-
-  navMenu.classList.toggle('active', isOpen);
-  mobileToggle.classList.toggle('active', isOpen);
-  mobileToggle.setAttribute('aria-expanded', String(isOpen));
-  mobileToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
-  document.body.classList.toggle('mobile-menu-open', isOpen);
-  updateStickyTelegramCta();
-}
-
-function getHeaderHeight() {
-  return header?.offsetHeight || 0;
-}
-
-function updateHeaderState() {
-  if (header) {
-    header.classList.toggle('scrolled', window.scrollY > 50);
-  }
-
-  const scrollY = window.pageYOffset;
-  const headerHeight = getHeaderHeight();
-  let activeSectionId = null;
-
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - headerHeight - 100;
-    if (scrollY >= sectionTop) {
-      activeSectionId = section.getAttribute('id');
+    if (stickyCta && hero) {
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      stickyCta.classList.toggle('is-visible', heroBottom < 60);
     }
-  });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.toggle('active', link.getAttribute('href') === `#${activeSectionId}`);
-  });
-}
-
-function isElementNearViewport(element) {
-  if (!element) return false;
-
-  const rect = element.getBoundingClientRect();
-  return rect.top < window.innerHeight - 40 && rect.bottom > 80;
-}
-
-function updateStickyTelegramCta() {
-  if (!stickyTelegramCta) return;
-
-  const shouldShow = window.innerWidth <= 768 &&
-    window.scrollY > 80 &&
-    !navMenu?.classList.contains('active') &&
-    !document.body.classList.contains('lightbox-open') &&
-    !isElementNearViewport(contactSection) &&
-    !isElementNearViewport(footer);
-
-  stickyTelegramCta.classList.toggle('is-visible', shouldShow);
-  document.body.classList.toggle('has-sticky-cta', shouldShow);
-}
-
-// Mobile Menu Toggle
-mobileToggle?.addEventListener('click', () => {
-  setMobileMenuOpen(!navMenu?.classList.contains('active'));
-});
-
-// Close mobile menu when clicking outside or pressing Escape
-document.addEventListener('click', (e) => {
-  if (!navMenu?.classList.contains('active')) return;
-
-  if (!navMenu.contains(e.target) && !mobileToggle?.contains(e.target)) {
-    setMobileMenuOpen(false);
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && navMenu?.classList.contains('active')) {
-    setMobileMenuOpen(false);
-  }
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
-    if (!targetId || targetId.length <= 1) return;
-
-    const targetElement = document.getElementById(targetId.slice(1));
-    if (!targetElement) return;
-
-    e.preventDefault();
-    setMobileMenuOpen(false);
-
-    const elementPosition = targetElement.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - getHeaderHeight();
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
+  /* ----- mobile nav toggle ----- */
+  if (toggle && nav) {
+    const closeNav = () => {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.removeProperty('overflow');
+    };
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
     });
+    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
+    });
+  }
+
+  /* ----- active section highlight ----- */
+  const sectionMap = new Map();
+  navLinks.forEach((link) => {
+    const id = link.getAttribute('href').slice(1);
+    const section = document.getElementById(id);
+    if (section) sectionMap.set(section, link);
   });
-});
 
-// Update header and active nav link on scroll without doing layout work for every event.
-let scrollTicking = false;
-window.addEventListener('scroll', () => {
-  if (scrollTicking) return;
+  if ('IntersectionObserver' in window && sectionMap.size) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const link = sectionMap.get(entry.target);
+          if (!link) return;
+          if (entry.isIntersecting) {
+            navLinks.forEach((l) => l.classList.remove('is-active'));
+            link.classList.add('is-active');
+          }
+        });
+      },
+      { rootMargin: '-50% 0px -45% 0px', threshold: 0 }
+    );
+    sectionMap.forEach((_link, section) => observer.observe(section));
+  }
 
-  window.requestAnimationFrame(() => {
-    updateHeaderState();
-    updateStickyTelegramCta();
-    scrollTicking = false;
-  });
-  scrollTicking = true;
-}, { passive: true });
+  /* ----- scroll reveal ----- */
+  const revealTargets = document.querySelectorAll(
+    '.section-marker, .section-head, .process-step, .about-card, .fit-card, .specimen, .faq-list, .contact-card'
+  );
+  revealTargets.forEach((el) => el.classList.add('reveal'));
 
-window.addEventListener('resize', updateStickyTelegramCta, { passive: true });
-
-// Initialize components when DOM is loaded
-function initializePage() {
-  updateHeaderState();
-  updateStickyTelegramCta();
-
-  // Import and initialize testimonials
-  import('./testimonials.js').then(module => {
-    module.initializeTestimonials();
-  }).catch(err => console.error('Error loading testimonials module:', err));
-}
-
-document.addEventListener('lightbox:toggle', updateStickyTelegramCta);
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializePage);
-} else {
-  initializePage();
-}
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+    );
+    revealTargets.forEach((el) => io.observe(el));
+  } else {
+    revealTargets.forEach((el) => el.classList.add('is-visible'));
+  }
+})();

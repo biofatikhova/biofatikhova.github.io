@@ -1,124 +1,85 @@
-/* Biology Background Icons Animation */
+/* =============================================================
+   Animations
+   ============================================================= */
 
-.bio-background-icons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 500vh;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
+@keyframes pulse {
+  0%   { transform: scale(0.6); opacity: 0.5; }
+  70%  { transform: scale(2);   opacity: 0;   }
+  100% { transform: scale(2);   opacity: 0;   }
 }
 
-.bio-icon {
-  position: absolute;
-  font-size: 2rem;
-  opacity: 0.15;
-  animation: floatRotate 20s infinite ease-in-out;
-  filter: blur(0.5px);
-  will-change: transform, opacity;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  contain: layout style paint;
+@keyframes slow-spin {
+  to { transform: rotate(360deg); }
 }
 
-@keyframes floatRotate {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-    opacity: 0.1;
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* hero entry — staggered */
+.hero-title-eyebrow,
+.hero-title-main,
+.hero-title-tail,
+.hero-bio,
+.hero-diagnostic,
+.hero-ctas,
+.profi-badge,
+.hero-right {
+  animation: reveal var(--d-slow) var(--ease-out) both;
+}
+.hero-title-main { animation-delay: 80ms; }
+.hero-title-tail { animation-delay: 160ms; }
+.hero-bio        { animation-delay: 220ms; }
+.hero-diagnostic { animation-delay: 300ms; }
+.hero-ctas       { animation-delay: 360ms; }
+.profi-badge     { animation-delay: 440ms; }
+.hero-right      { animation-delay: 240ms; }
+
+/* scroll-reveal hooks */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* nav links on mobile fade */
+@media (max-width: 880px) {
+  .nav-menu.is-open .nav-link {
+    animation: reveal var(--d-base) var(--ease-out) both;
   }
-  25% {
-    transform: translate3d(15px, -20px, 0) rotate(90deg);
-    opacity: 0.2;
-  }
-  50% {
-    transform: translate3d(-10px, -30px, 0) rotate(180deg);
-    opacity: 0.15;
-  }
-  75% {
-    transform: translate3d(20px, -15px, 0) rotate(270deg);
-    opacity: 0.2;
-  }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(360deg);
-    opacity: 0.1;
-  }
+  .nav-menu.is-open .nav-link:nth-child(1) { animation-delay: 40ms; }
+  .nav-menu.is-open .nav-link:nth-child(2) { animation-delay: 80ms; }
+  .nav-menu.is-open .nav-link:nth-child(3) { animation-delay: 120ms; }
+  .nav-menu.is-open .nav-link:nth-child(4) { animation-delay: 160ms; }
+  .nav-menu.is-open .nav-link:nth-child(5) { animation-delay: 200ms; }
+  .nav-menu.is-open .nav-link:nth-child(6) { animation-delay: 240ms; }
 }
 
-/* Keep page content positioned without trapping fixed overlays below the header. */
-main {
-  position: relative;
-  z-index: auto;
-}
-
-.header {
-  z-index: 1000;
-}
-
-section {
-  position: relative;
-  z-index: 1;
-  background: transparent !important;
-}
-
-section .container {
-  position: relative;
-  z-index: 1;
-}
-
-/* Ensure testimonials section allows icons to show through gaps */
-#testimonials {
-  position: relative;
-  z-index: 1;
-}
-
-#testimonials .container {
-  position: relative;
-  z-index: 1;
-}
-
-.testimonials-grid {
-  position: relative;
-  z-index: 1;
-}
-
-.testimonial-card {
-  position: relative;
-  z-index: 1;
-}
-
-/* Adjust icons for smaller screens - keep all icons visible */
-@media (max-width: 768px) {
-  .bio-icon {
-    font-size: 1.6rem;
-    opacity: 0.2;
-    filter: blur(0.3px);
-    animation-duration: 25s;
-  }
-  
-  .bio-background-icons {
-    min-height: 500vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .bio-icon {
-    font-size: 1.5rem;
-    opacity: 0.18;
-    filter: blur(0.2px);
-    animation-duration: 30s;
-  }
-  
-  .bio-background-icons {
-    min-height: 500vh;
-  }
-}
-
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .bio-icon {
-    animation: none;
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
+  .portrait-frame { animation: none; }
+  .hero-diagnostic .dot::after { display: none; }
+  .reveal { opacity: 1; transform: none; }
 }

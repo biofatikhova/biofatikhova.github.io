@@ -1,163 +1,112 @@
 /**
- * Dynamic lessons gallery and lightbox.
+ * Lessons gallery + lightbox.
  */
+(function () {
+  const grid = document.getElementById('lessons-grid');
+  const lightbox = document.getElementById('lightbox');
+  const lbImage = document.getElementById('lightbox-image');
+  const lbCaption = document.getElementById('lightbox-caption');
+  const closeBtn = lightbox && lightbox.querySelector('.lightbox-close');
+  const prevBtn = lightbox && lightbox.querySelector('.lightbox-prev');
+  const nextBtn = lightbox && lightbox.querySelector('.lightbox-next');
 
-const FALLBACK_LESSONS = Array.from({ length: 9 }, (_, index) => ({
-  image: `./images/lessons/lesson${index + 1}.jpg`,
-  title: `Пример занятия ${index + 1}`,
-  alt: `Пример учебного материала по биологии ${index + 1}`
-}));
+  let lessons = [];
+  let activeIndex = 0;
+  let lastFocused = null;
 
-let lessonData = [];
-let lessonImages = [];
-let currentImageIndex = 0;
+  const FALLBACK = Array.from({ length: 9 }, (_, i) => ({
+    image: `./images/lessons/lesson${i + 1}.jpg`,
+    title: `Пример занятия ${i + 1}`,
+    alt: `Пример учебного материала по биологии ${i + 1}`,
+  }));
 
-let lightbox;
-let lightboxImage;
-let closeBtn;
-let prevBtn;
-let nextBtn;
+  const pad2 = (n) => String(n).padStart(2, '0');
 
-document.addEventListener('DOMContentLoaded', initializeLessonsGallery);
+  function renderGallery(items) {
+    if (!grid) return;
+    grid.innerHTML = '';
+    items.forEach((item, index) => {
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'lesson-tile';
+      tile.setAttribute('aria-label', `Открыть ${item.title}`);
+      tile.dataset.index = String(index);
 
-async function initializeLessonsGallery() {
-  lightbox = document.getElementById('lightbox');
-  lightboxImage = document.getElementById('lightbox-image');
-  closeBtn = document.querySelector('.lightbox-close');
-  prevBtn = document.querySelector('.lightbox-nav.prev');
-  nextBtn = document.querySelector('.lightbox-nav.next');
+      const num = document.createElement('span');
+      num.className = 'lesson-tile-num';
+      num.textContent = pad2(index + 1);
 
-  lessonData = await loadLessonsFromJSON();
-  lessonImages = lessonData.map(lesson => lesson.image).filter(Boolean);
-  renderLessonCards();
-  bindLightboxControls();
-}
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.alt || item.title || '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
 
-async function loadLessonsFromJSON() {
-  try {
-    const response = await fetch('./lessons.json', { cache: 'no-cache' });
-    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-
-    const data = await response.json();
-    const lessons = Array.isArray(data.lessons) ? data.lessons : [];
-    return lessons.length > 0 ? lessons : FALLBACK_LESSONS;
-  } catch (error) {
-    console.error('Error loading lessons data:', error);
-    return FALLBACK_LESSONS;
-  }
-}
-
-function bindLightboxControls() {
-  lightbox?.addEventListener('click', closeLightbox);
-
-  closeBtn?.addEventListener('click', event => {
-    event.stopPropagation();
-    closeLightbox();
-  });
-
-  prevBtn?.addEventListener('click', event => {
-    event.stopPropagation();
-    navigateImage(-1);
-  });
-
-  nextBtn?.addEventListener('click', event => {
-    event.stopPropagation();
-    navigateImage(1);
-  });
-
-  document.querySelector('.lightbox-content')?.addEventListener('click', event => {
-    event.stopPropagation();
-  });
-
-  document.addEventListener('keydown', event => {
-    if (!lightbox?.classList.contains('active')) return;
-
-    switch (event.key) {
-      case 'Escape':
-        closeLightbox();
-        break;
-      case 'ArrowLeft':
-        navigateImage(-1);
-        break;
-      case 'ArrowRight':
-        navigateImage(1);
-        break;
-      default:
-        break;
-    }
-  });
-}
-
-function renderLessonCards() {
-  const lessonsGrid = document.getElementById('lessons-grid');
-  if (!lessonsGrid) return;
-
-  lessonsGrid.innerHTML = '';
-
-  lessonData.forEach((lesson, index) => {
-    const lessonCard = document.createElement('div');
-    const lessonImage = document.createElement('img');
-
-    lessonCard.className = 'lesson-card';
-    lessonCard.dataset.index = String(index);
-    lessonCard.tabIndex = 0;
-    lessonCard.role = 'button';
-    lessonCard.setAttribute('aria-label', `Открыть материал: ${lesson.title || lesson.alt || 'урок биологии'}`);
-
-    lessonImage.src = lesson.image;
-    lessonImage.alt = lesson.alt || lesson.title || 'Урок биологии';
-    lessonImage.className = 'lesson-thumbnail';
-    lessonImage.loading = 'lazy';
-    lessonImage.decoding = 'async';
-
-    lessonCard.appendChild(lessonImage);
-
-    lessonCard.addEventListener('click', () => openLightbox(index));
-    lessonCard.addEventListener('keydown', event => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
-
-      event.preventDefault();
-      openLightbox(index);
+      tile.appendChild(num);
+      tile.appendChild(img);
+      tile.addEventListener('click', () => openLightbox(index));
+      grid.appendChild(tile);
     });
+  }
 
-    lessonsGrid.appendChild(lessonCard);
-  });
-}
+  function openLightbox(index) {
+    if (!lightbox || !lessons.length) return;
+    activeIndex = index;
+    lastFocused = document.activeElement;
+    setImage();
+    lightbox.classList.add('is-open');
+    lightbox.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn && closeBtn.focus();
+  }
 
-function openLightbox(index) {
-  if (!lightbox || !lightboxImage || !lessonImages[index]) return;
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('hidden', '');
+    document.body.style.removeProperty('overflow');
+    if (lastFocused && typeof lastFocused.focus === 'function') {
+      lastFocused.focus();
+    }
+  }
 
-  currentImageIndex = index;
-  lightboxImage.src = lessonImages[index];
-  lightboxImage.alt = lessonData[index]?.alt || lessonData[index]?.title || 'Урок биологии';
-  lightbox.classList.add('active');
-  document.body.classList.add('lightbox-open');
-  document.body.style.overflow = 'hidden';
-  document.dispatchEvent(new CustomEvent('lightbox:toggle'));
-  closeBtn?.focus();
-}
+  function setImage() {
+    const item = lessons[activeIndex];
+    if (!item || !lbImage) return;
+    lbImage.src = item.image;
+    lbImage.alt = item.alt || item.title || '';
+    if (lbCaption) lbCaption.textContent = `${pad2(activeIndex + 1)} · ${item.title || ''}`;
+  }
 
-function closeLightbox() {
-  if (!lightbox) return;
+  function step(delta) {
+    if (!lessons.length) return;
+    activeIndex = (activeIndex + delta + lessons.length) % lessons.length;
+    setImage();
+  }
 
-  lightbox.classList.remove('active');
-  document.body.classList.remove('lightbox-open');
-  document.body.style.overflow = '';
-  document.dispatchEvent(new CustomEvent('lightbox:toggle'));
-}
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    closeBtn && closeBtn.addEventListener('click', closeLightbox);
+    prevBtn && prevBtn.addEventListener('click', () => step(-1));
+    nextBtn && nextBtn.addEventListener('click', () => step(1));
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'ArrowRight') step(1);
+    });
+  }
 
-function navigateImage(direction) {
-  if (!lightboxImage || lessonImages.length === 0) return;
-
-  currentImageIndex = (currentImageIndex + direction + lessonImages.length) % lessonImages.length;
-  lightboxImage.src = lessonImages[currentImageIndex];
-  lightboxImage.alt = lessonData[currentImageIndex]?.alt || lessonData[currentImageIndex]?.title || 'Урок биологии';
-}
-
-window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox;
-window.navigateImage = navigateImage;
-window.changeLightboxImage = (direction, event) => {
-  event?.stopPropagation();
-  navigateImage(direction);
-};
+  fetch('./lessons.json', { cache: 'no-cache' })
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error('lessons fetch failed'))))
+    .then((data) => {
+      lessons = Array.isArray(data?.lessons) && data.lessons.length ? data.lessons : FALLBACK;
+      renderGallery(lessons);
+    })
+    .catch(() => {
+      lessons = FALLBACK;
+      renderGallery(lessons);
+    });
+})();
