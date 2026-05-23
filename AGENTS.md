@@ -23,9 +23,9 @@ If you change the stack, **verify a clean build deploys to Pages before declarin
 
 - Marketing site for Маргарита Фатихова, biology tutor (БиоФатихова).
 - Audience: Russian-speaking parents and students, grades 5–11, ОГЭ/ЕГЭ prep or grade improvement.
-- Primary conversion: Telegram booking for a free 20-minute diagnostic. Keep that loud and obvious wherever the design ends up.
+- Primary conversion: Telegram booking for a free 20-minute trial lesson (`пробный урок`). Keep that loud and obvious in the header, hero, pricing, FAQ, contact, and footer CTA surfaces.
 - Content lives in: page sections (about, lessons, pricing, testimonials, FAQ, contact) + two JSON files (`lessons.json`, `testimonials.json`).
-- Copy is Russian. Don't translate or rewrite copy unless asked.
+- Copy is Russian. The current website copy is the source of truth; don't translate or rewrite copy unless asked.
 
 ## Current stack (replaceable)
 
@@ -34,7 +34,7 @@ Plain HTML/CSS/vanilla JS, no build. Files:
 ```
 index.html
 css/{main,layout,components,animations}.css
-js/{main,bio-icons,simple-lightbox,testimonials}.js
+js/{main,simple-lightbox,testimonials}.js
 images/{icons,lessons,profile}/
 lessons.json
 testimonials.json
@@ -42,7 +42,7 @@ docs/
 README.md
 ```
 
-Tokens live in `css/main.css` `:root` (forest-green palette, `Roboto`, `--border-radius: 8px`). Treat these as a starting palette — you can replace the whole design system.
+Tokens live in `css/main.css` `:root`: warm paper surfaces, ink/moss/leaf greens, ochre/clay accents, Playfair Display, IBM Plex Sans, IBM Plex Mono, fluid type, spacing, radius, and elevation tokens.
 
 Local serve (current stack):
 ```bash
@@ -51,36 +51,32 @@ python3 -m http.server 8000
 
 ## Design direction (use unless user redirects)
 
+- The current website is the design source of truth. Preserve its calm editorial-botanical direction unless asked to redesign again.
 - Feel: professional, calm, biology-themed (botanical/leaf/nature motifs). Audience is parents picking a tutor — trust > flashy.
 - Mobile-first. Most traffic is phones.
-- Telegram CTA = loudest element on every screen. Sticky mobile CTA is non-negotiable in spirit (form is up to you).
+- Telegram CTA should remain prominent across the journey. The current implementation intentionally does not render a sticky mobile CTA; do not re-add one only because older guidance mentioned it.
 - Readability matters — long Russian testimonial text, parents skimming on phones.
-- Anthropic skills like `frontend-design` are encouraged. Lean on them. Don't feel constrained by the current visual language.
 
-## Weak spots in the current design (optional inspiration, not a punch list)
+## Current design notes
 
-- Background floating emoji icons feel inconsistent (mixed emoji styles, opacity tuning).
-- Both pricing cards use the `popular` modifier — no real differentiation.
-- Hero has three competing CTAs of similar weight.
-- Sections forced transparent with `!important` so background icons show through — they blur into each other.
-- No fluid type scale; `h2` jumps at breakpoints.
-- All card types share the same left-border + gradient recipe.
-- No spacing scale tokens.
-
-Fix any, all, or none — or throw it all out and start over.
+- Hero prioritizes one Telegram CTA plus a secondary pricing link and a Profi.ru rating badge.
+- Pricing has two clear cards with package prices and no crossed-out comparison prices.
+- Lessons render from `lessons.json`; the gallery currently has 8 items and uses `lesson5.png`.
+- Testimonials render from `testimonials.json` with collapse/expand behavior.
+- CSS still contains unused sticky CTA styles and JS still checks for `.sticky-cta`; this is harmless fallback code, not a requirement to render that element.
 
 ## Things worth preserving (soft preferences, override if you have a reason)
 
 - `data-cta="..."` attributes on Telegram/booking links — look like analytics hooks. If you keep tracking, keep these or replace with an equivalent.
 - Accessibility primitives currently in place: `aria-label`, `aria-expanded`, `aria-controls`, `role="dialog"` on lightbox, visible focus outlines, `prefers-reduced-motion` handling on background animation. Re-implement these in the new design.
 - `lessons.json` and `testimonials.json` schemas — the content owner edits these. If you change schema, update both the data and the rendering, and call it out.
-- Free-diagnostic messaging and pricing numbers — content, not design. Don't silently change.
+- Free trial lesson messaging and pricing numbers — content, not design. Don't silently change.
 
 ## Verification before declaring done
 
 1. Build (if any) succeeds.
 2. Site loads at production URL (or local preview matching production config).
-3. Telegram CTA reachable from every viewport (mobile + desktop).
+3. Telegram CTA is reachable from mobile and desktop viewports through the current CTA surfaces.
 4. Lessons gallery + lightbox work.
 5. Testimonials render (collapse/expand still makes sense or has been replaced intentionally).
 6. Mobile nav works.

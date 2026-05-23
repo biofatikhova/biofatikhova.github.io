@@ -61,12 +61,12 @@
 }
 
 .btn-on-ink {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: var(--shadow-mid);
 }
 .btn-on-ink .btn-icon {
-  filter: none;
-  /* telegram svg is colored — recolor via mix-blend wrapper not needed; keep visible */
+  filter: brightness(0) invert(1);
 }
 .btn-on-ink:hover {
   background: var(--clay);
@@ -145,7 +145,7 @@
 }
 .about-card {
   position: relative;
-  padding: var(--s-7) var(--s-6);
+  padding: var(--s-5) var(--s-5);
   background: var(--shell);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
@@ -165,45 +165,39 @@
 }
 .about-card h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.25rem, 1.9vw, 1.5rem);
   font-weight: 500;
   letter-spacing: -0.015em;
   color: var(--ink);
-  margin-bottom: var(--s-5);
+  margin-bottom: var(--s-3);
 }
 
-.ledger {
+.about-stats {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-top: var(--s-3);
 }
-.ledger li {
-  display: grid;
-  grid-template-columns: 80px 1fr;
+.about-stats li {
+  display: inline-flex;
   align-items: baseline;
-  gap: var(--s-4);
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-  font-size: 0.96rem;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-size: 0.88rem;
   color: var(--ink-soft);
 }
-.ledger li:last-child { border-bottom: 1px solid var(--line); }
-.ledger li span {
+.about-stats li span {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 500;
   color: var(--moss);
-  font-weight: 500;
-}
-.ledger li em {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  color: var(--ink);
-  margin-right: 6px;
 }
 
 @media (max-width: 700px) {
   .about-grid { grid-template-columns: 1fr; }
-  .ledger li { grid-template-columns: 64px 1fr; }
 }
 
 /* ============ Fit cards ============ */
@@ -282,23 +276,24 @@
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--r-md);
-  background: var(--paper-deep);
+  background: #fff;
   border: 1px solid var(--line);
   box-shadow: var(--shadow-low);
   cursor: zoom-in;
   transition: transform var(--d-base) var(--ease-out), box-shadow var(--d-base) var(--ease-out);
 }
 .lesson-tile img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform var(--d-slow) var(--ease-out);
 }
 .lesson-tile:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-mid);
 }
-.lesson-tile:hover img { transform: scale(1.06); }
+.lesson-tile:hover img { transform: scale(1.02); }
 .lesson-tile::after {
   content: "";
   position: absolute;
@@ -387,8 +382,10 @@
 .lightbox-nav {
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2rem;
-  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-family: var(--font-body);
+  font-weight: 300;
+  padding-bottom: 4px;
 }
 .lightbox-nav:hover { transform: translateY(-50%) scale(1.06); }
 .lightbox-prev { left: 24px; }
@@ -464,7 +461,8 @@
 .specimen-fit {
   font-size: 0.95rem;
   color: var(--ink-soft);
-  max-width: 38ch;
+  max-width: 50ch;
+  text-wrap: balance;
 }
 
 .specimen-price {
@@ -511,20 +509,13 @@
   letter-spacing: 0.14em;
   color: var(--ink-soft);
 }
-.package-prices { display: flex; align-items: baseline; gap: 8px; }
-.package-strike {
-  font-size: 0.82rem;
-  color: var(--ink-faint);
-  text-decoration: line-through;
-}
 .package-final {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.15rem;
   font-weight: 500;
-  color: var(--clay);
+  color: var(--moss);
 }
-.specimen--alt .package-final { color: var(--moss); }
 
 .specimen-list {
   display: flex;
@@ -688,8 +679,8 @@
 /* ============ FAQ ============ */
 
 .faq-list {
-  max-width: 780px;
-  margin: 0 auto;
+  max-width: 880px;
+  margin: 0;
   border-top: 1px solid var(--line-strong);
 }
 .faq-item {
@@ -702,11 +693,10 @@
   justify-content: space-between;
   gap: var(--s-4);
   padding: var(--s-5) 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
   font-weight: 500;
-  font-style: italic;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   color: var(--ink);
   cursor: pointer;
   list-style: none;
@@ -718,15 +708,17 @@
   flex: 0 0 28px;
   width: 28px;
   height: 28px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--line-strong);
   border-radius: 50%;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-style: normal;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 400;
+  line-height: 1;
+  text-align: center;
   color: var(--moss);
   transition: transform var(--d-base) var(--ease-out), background var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out);
 }

@@ -275,16 +275,16 @@
 }
 
 .profi-badge {
-  margin-top: var(--s-7);
+  margin-top: var(--s-6);
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 14px;
-  background: transparent;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--shell);
   border: 1px solid var(--line-strong);
-  border-radius: var(--r-pill);
-  font-size: 0.82rem;
+  border-radius: var(--r-md);
   color: var(--ink-soft);
+  box-shadow: var(--shadow-low);
   transition: border-color var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out), transform var(--d-fast) var(--ease-out);
 }
 .profi-badge:hover {
@@ -292,9 +292,36 @@
   color: var(--ink);
   transform: translateY(-1px);
 }
-.profi-stars { color: var(--ochre); font-size: 0.88rem; letter-spacing: 1px; }
-.profi-text strong { font-weight: 600; color: var(--ink); margin-right: 2px; }
-.profi-arrow { color: var(--moss); }
+.profi-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding-right: 14px;
+  border-right: 1px solid var(--line);
+}
+.profi-stars { color: var(--ochre); font-size: 0.9rem; letter-spacing: 2px; line-height: 1; }
+.profi-rating {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+.profi-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.profi-meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+}
+.profi-logo { height: 18px; width: auto; display: inline-block; }
+.profi-arrow { color: var(--moss); font-size: 1rem; }
 
 .hero-right {
   position: relative;

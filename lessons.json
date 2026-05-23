@@ -21,7 +21,7 @@
       "alt": "Пример учебного материала по биологии 4"
     },
     {
-      "image": "./images/lessons/lesson5.jpg",
+      "image": "./images/lessons/lesson5.png",
       "title": "Пример занятия 5",
       "alt": "Пример учебного материала по биологии 5"
     },
@@ -39,11 +39,6 @@
       "image": "./images/lessons/lesson8.jpg",
       "title": "Пример занятия 8",
       "alt": "Пример учебного материала по биологии 8"
-    },
-    {
-      "image": "./images/lessons/lesson9.jpg",
-      "title": "Пример занятия 9",
-      "alt": "Пример учебного материала по биологии 9"
     }
   ]
 }
