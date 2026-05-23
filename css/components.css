@@ -49,23 +49,117 @@
   font-size: 1.2rem;
 }
 
+/* Lead-generation sections */
+.process-grid,
+.fit-grid {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.process-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.fit-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.process-step,
+.fit-card,
+.faq-item {
+  background: linear-gradient(135deg, var(--white) 0%, var(--primary-light) 100%);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary);
+}
+
+.process-step,
+.fit-card {
+  padding: 1.5rem;
+  transition: var(--transition);
+}
+
+.process-step:hover,
+.fit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.process-step h3,
+.fit-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--secondary);
+}
+
+.process-step p,
+.fit-card p {
+  color: var(--gray);
+  margin: 0;
+}
+
+.fit-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background-color: var(--white);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(74, 128, 84, 0.12);
+}
+
+.section-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 /* Lesson cards */
 .lessons-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  max-width: 1000px;
+  display: flex;
+  gap: 1rem;
+  max-width: 100%;
   margin: 0 auto;
+  padding: 0.5rem 0.25rem 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: rgba(74, 128, 84, 0.45) rgba(232, 245, 234, 0.8);
 }
 
 .lesson-card {
   position: relative;
+  flex: 0 0 min(78vw, 320px);
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--shadow);
-  height: 250px;
+  aspect-ratio: 4 / 3;
+  height: auto;
   cursor: pointer;
+  scroll-snap-align: start;
   transition: var(--transition);
+  background-color: var(--white);
 }
 
 .lesson-card:hover {
@@ -85,21 +179,6 @@
 
 .lesson-card:hover .lesson-thumbnail {
   transform: scale(1.05);
-}
-
-.lesson-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-  color: var(--white);
-  padding: 1.5rem;
-}
-
-.lesson-overlay span {
-  font-size: 1.2rem;
-  font-weight: 500;
 }
 
 /* Lightbox */
@@ -301,7 +380,25 @@
 .total-price {
   font-size: 1.5rem;
   color: var(--primary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+.pricing-fit {
+  color: var(--gray);
+  margin: -0.25rem 0 1.25rem;
+  min-height: 3rem;
+}
+
+.package-note {
+  display: inline-flex;
+  align-self: center;
+  margin: -1rem 0 0.75rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.85rem;
   font-weight: 700;
 }
 
@@ -535,6 +632,54 @@
   white-space: nowrap;
 }
 
+/* FAQ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 1.25rem 1.5rem;
+  color: var(--secondary);
+  font-weight: 700;
+  list-style: none;
+  position: relative;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
+  content: '−';
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 1.5rem 1.25rem;
+  color: var(--gray);
+}
+
 /* Contact items */
 .contact-grid {
   display: grid;
@@ -580,11 +725,30 @@
   color: var(--white);
 }
 
+.contact-item-primary {
+  background: var(--gradient-primary);
+  color: var(--white);
+}
+
+.contact-item-primary span {
+  color: var(--white);
+}
+
+.contact-item-secondary {
+  opacity: 0.92;
+}
+
+/* Sticky mobile CTA */
+.sticky-telegram-cta {
+  display: none;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
-  .lessons-grid,
   .pricing-grid,
-  .contact-grid {
+  .contact-grid,
+  .process-grid,
+  .fit-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -613,5 +777,69 @@
   
   .testimonials-grid {
     max-width: 100%;
+  }
+
+  .process-step,
+  .fit-card {
+    padding: 1.25rem;
+  }
+
+  .pricing-fit {
+    min-height: auto;
+  }
+
+  .sticky-telegram-cta {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border-radius: var(--border-radius);
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(74, 128, 84, 0.35);
+    font-weight: 700;
+    text-align: center;
+    transform: translateY(calc(100% + 2rem));
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .sticky-telegram-cta img {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+  }
+
+  .sticky-telegram-cta.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.has-sticky-cta {
+    padding-bottom: 5rem;
+  }
+
+  body.mobile-menu-open .sticky-telegram-cta,
+  body.lightbox-open .sticky-telegram-cta {
+    transform: translateY(calc(100% + 2rem));
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .sticky-telegram-cta {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    font-size: 0.95rem;
   }
 }

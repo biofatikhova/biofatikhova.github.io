@@ -2,18 +2,11 @@
  * Dynamic lessons gallery and lightbox.
  */
 
-const FALLBACK_LESSONS = [
-  {
-    image: './images/lessons/lesson1.jpg',
-    title: 'Биология 10 класс',
-    alt: 'Биология 10 класс'
-  },
-  {
-    image: './images/lessons/lesson2.jpg',
-    title: 'Биология 11 класс',
-    alt: 'Биология 11 класс'
-  }
-];
+const FALLBACK_LESSONS = Array.from({ length: 9 }, (_, index) => ({
+  image: `./images/lessons/lesson${index + 1}.jpg`,
+  title: `Пример занятия ${index + 1}`,
+  alt: `Пример учебного материала по биологии ${index + 1}`
+}));
 
 let lessonData = [];
 let lessonImages = [];
@@ -42,7 +35,7 @@ async function initializeLessonsGallery() {
 
 async function loadLessonsFromJSON() {
   try {
-    const response = await fetch('./lessons.json');
+    const response = await fetch('./lessons.json', { cache: 'no-cache' });
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
     const data = await response.json();
@@ -104,8 +97,6 @@ function renderLessonCards() {
   lessonData.forEach((lesson, index) => {
     const lessonCard = document.createElement('div');
     const lessonImage = document.createElement('img');
-    const lessonOverlay = document.createElement('div');
-    const lessonTitle = document.createElement('span');
 
     lessonCard.className = 'lesson-card';
     lessonCard.dataset.index = String(index);
@@ -119,11 +110,7 @@ function renderLessonCards() {
     lessonImage.loading = 'lazy';
     lessonImage.decoding = 'async';
 
-    lessonOverlay.className = 'lesson-overlay';
-    lessonTitle.textContent = lesson.title || '';
-
-    lessonOverlay.appendChild(lessonTitle);
-    lessonCard.append(lessonImage, lessonOverlay);
+    lessonCard.appendChild(lessonImage);
 
     lessonCard.addEventListener('click', () => openLightbox(index));
     lessonCard.addEventListener('keydown', event => {
@@ -144,7 +131,9 @@ function openLightbox(index) {
   lightboxImage.src = lessonImages[index];
   lightboxImage.alt = lessonData[index]?.alt || lessonData[index]?.title || 'Урок биологии';
   lightbox.classList.add('active');
+  document.body.classList.add('lightbox-open');
   document.body.style.overflow = 'hidden';
+  document.dispatchEvent(new CustomEvent('lightbox:toggle'));
   closeBtn?.focus();
 }
 
@@ -152,7 +141,9 @@ function closeLightbox() {
   if (!lightbox) return;
 
   lightbox.classList.remove('active');
+  document.body.classList.remove('lightbox-open');
   document.body.style.overflow = '';
+  document.dispatchEvent(new CustomEvent('lightbox:toggle'));
 }
 
 function navigateImage(direction) {

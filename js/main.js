@@ -6,7 +6,12 @@
 const header = document.querySelector('.header');
 const mobileToggle = document.querySelector('.mobile-toggle');
 const navMenu = document.querySelector('.nav-menu');
-const sections = document.querySelectorAll('section[id]');
+const sections = [...document.querySelectorAll('section[id]')].filter(section =>
+  document.querySelector(`.nav-link[href="#${section.id}"]`)
+);
+const stickyTelegramCta = document.querySelector('.sticky-telegram-cta');
+const contactSection = document.getElementById('contact');
+const footer = document.querySelector('.footer');
 
 function setMobileMenuOpen(isOpen) {
   if (!navMenu || !mobileToggle) return;
@@ -15,6 +20,8 @@ function setMobileMenuOpen(isOpen) {
   mobileToggle.classList.toggle('active', isOpen);
   mobileToggle.setAttribute('aria-expanded', String(isOpen));
   mobileToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+  document.body.classList.toggle('mobile-menu-open', isOpen);
+  updateStickyTelegramCta();
 }
 
 function getHeaderHeight() {
@@ -40,6 +47,27 @@ function updateHeaderState() {
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === `#${activeSectionId}`);
   });
+}
+
+function isElementNearViewport(element) {
+  if (!element) return false;
+
+  const rect = element.getBoundingClientRect();
+  return rect.top < window.innerHeight - 40 && rect.bottom > 80;
+}
+
+function updateStickyTelegramCta() {
+  if (!stickyTelegramCta) return;
+
+  const shouldShow = window.innerWidth <= 768 &&
+    window.scrollY > 80 &&
+    !navMenu?.classList.contains('active') &&
+    !document.body.classList.contains('lightbox-open') &&
+    !isElementNearViewport(contactSection) &&
+    !isElementNearViewport(footer);
+
+  stickyTelegramCta.classList.toggle('is-visible', shouldShow);
+  document.body.classList.toggle('has-sticky-cta', shouldShow);
 }
 
 // Mobile Menu Toggle
@@ -91,20 +119,26 @@ window.addEventListener('scroll', () => {
 
   window.requestAnimationFrame(() => {
     updateHeaderState();
+    updateStickyTelegramCta();
     scrollTicking = false;
   });
   scrollTicking = true;
 }, { passive: true });
 
+window.addEventListener('resize', updateStickyTelegramCta, { passive: true });
+
 // Initialize components when DOM is loaded
 function initializePage() {
   updateHeaderState();
+  updateStickyTelegramCta();
 
   // Import and initialize testimonials
   import('./testimonials.js').then(module => {
     module.initializeTestimonials();
   }).catch(err => console.error('Error loading testimonials module:', err));
 }
+
+document.addEventListener('lightbox:toggle', updateStickyTelegramCta);
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializePage);
