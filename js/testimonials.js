@@ -5,6 +5,7 @@
   const grid = document.getElementById('testimonials-grid');
   const toggle = document.getElementById('testimonials-toggle-btn');
   const VISIBLE = 3;
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!grid) return;
 
@@ -53,30 +54,42 @@
     return article;
   }
 
+  function bindToggle(itemCount) {
+    if (!toggle) return;
+    if (itemCount <= VISIBLE) {
+      toggle.hidden = true;
+      return;
+    }
+    toggle.hidden = false;
+    if (toggle.dataset.bound === '1') return;
+    toggle.dataset.bound = '1';
+    toggle.addEventListener('click', () => {
+      const collapsed = grid.classList.toggle('is-collapsed');
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      if (collapsed) {
+        const section = document.getElementById('testimonials');
+        if (section) section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    });
+  }
+
   function render(items) {
     grid.innerHTML = '';
     items.forEach((item) => grid.appendChild(buildCard(item)));
-
-    if (toggle && items.length > VISIBLE) {
-      toggle.hidden = false;
-      toggle.addEventListener('click', () => {
-        const collapsed = grid.classList.toggle('is-collapsed');
-        toggle.setAttribute('aria-expanded', String(!collapsed));
-        if (collapsed) {
-          const section = document.getElementById('testimonials');
-          if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    }
+    bindToggle(items.length);
   }
+
+  /* If HTML already shipped a baked snapshot, bind the toggle to that count first. */
+  if (grid.children.length) bindToggle(grid.children.length);
 
   fetch('./testimonials.json', { cache: 'no-cache' })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error('testimonials fetch failed'))))
     .then((data) => {
-      const items = Array.isArray(data?.testimonials) ? data.testimonials : [];
+      const items = Array.isArray(data && data.testimonials) ? data.testimonials : [];
+      if (!items.length) return;
       render(items);
     })
-    .catch(() => {
-      grid.innerHTML = '';
+    .catch((err) => {
+      console.warn('testimonials.json:', err.message);
     });
 })();

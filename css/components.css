@@ -60,20 +60,6 @@
   transform: translateY(-2px);
 }
 
-.btn-on-ink {
-  background: var(--ink);
-  color: var(--paper);
-  box-shadow: var(--shadow-mid);
-}
-.btn-on-ink .btn-icon {
-  filter: brightness(0) invert(1);
-}
-.btn-on-ink:hover {
-  background: var(--clay);
-  color: var(--paper);
-}
-.btn-on-ink:hover .btn-icon { filter: brightness(0) invert(1); }
-
 .section-cta {
   display: flex;
   justify-content: center;
@@ -256,7 +242,7 @@
 
 @media (max-width: 700px) {
   .lessons-grid {
-    grid-template-columns: none;
+    grid-template-columns: unset;
     grid-auto-flow: column;
     grid-auto-columns: clamp(290px, 84vw, 380px);
     overflow-x: auto;
@@ -632,7 +618,7 @@
 }
 @media (max-width: 700px) {
   .testimonials-grid {
-    grid-template-columns: none;
+    grid-template-columns: unset;
     grid-auto-flow: column;
     grid-auto-columns: clamp(300px, 86vw, 380px);
     overflow-x: auto;

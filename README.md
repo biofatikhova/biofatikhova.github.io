@@ -40,7 +40,9 @@
 │   └── simple-lightbox.js  # Галерея занятий и лайтбокс
 ├── images/                 # Изображения
 ├── lessons.json            # Данные о занятиях
-└── testimonials.json       # Данные отзывов
+├── testimonials.json       # Данные отзывов
+├── sitemap.xml             # Карта сайта
+└── robots.txt              # Инструкции для роботов
 ```
 
 ## Контент и дизайн

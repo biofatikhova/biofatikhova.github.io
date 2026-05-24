@@ -1,12 +1,14 @@
 /**
- * Site behavior: header scroll state, mobile nav, active section highlight,
- * scroll-reveal, sticky CTA visibility.
+ * Site behavior: header scroll state, mobile nav, active section highlight, scroll-reveal.
  */
 (function () {
   const header = document.querySelector('.site-header');
   const nav = document.getElementById('primary-navigation');
   const toggle = document.querySelector('.mobile-toggle');
   const navLinks = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
+  const yearEl = document.querySelector('[data-year]');
+
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   /* ----- header scroll state ----- */
   if (header) {
@@ -17,19 +19,29 @@
 
   /* ----- mobile nav toggle ----- */
   if (toggle && nav) {
-    const closeNav = () => {
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.removeProperty('overflow');
-    };
-    toggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
+    const LABEL_OPEN = 'Открыть меню';
+    const LABEL_CLOSE = 'Закрыть меню';
+
+    const setOpen = (open) => {
+      nav.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? LABEL_CLOSE : LABEL_OPEN);
       document.body.style.overflow = open ? 'hidden' : '';
+    };
+    const closeNav = () => setOpen(false);
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!nav.classList.contains('is-open'));
     });
     nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeNav();
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+    });
+    document.addEventListener('click', (e) => {
+      if (!nav.classList.contains('is-open')) return;
+      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      closeNav();
     });
   }
 
@@ -42,18 +54,23 @@
   });
 
   if ('IntersectionObserver' in window && sectionMap.size) {
+    const ratios = new Map();
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          const link = sectionMap.get(entry.target);
-          if (!link) return;
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.remove('is-active'));
-            link.classList.add('is-active');
+        entries.forEach((entry) => ratios.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0));
+        let best = null;
+        let bestRatio = 0;
+        ratios.forEach((ratio, section) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            best = section;
           }
         });
+        if (!best) return;
+        const activeLink = sectionMap.get(best);
+        navLinks.forEach((l) => l.classList.toggle('is-active', l === activeLink));
       },
-      { rootMargin: '-50% 0px -45% 0px', threshold: 0 }
+      { rootMargin: '-40% 0px -40% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
     sectionMap.forEach((_link, section) => observer.observe(section));
   }

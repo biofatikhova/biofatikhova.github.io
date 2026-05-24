@@ -20,10 +20,11 @@
     if (!grid) return;
     grid.innerHTML = '';
     items.forEach((item, index) => {
+      if (!item || !item.image) return;
       const tile = document.createElement('button');
       tile.type = 'button';
       tile.className = 'lesson-tile';
-      tile.setAttribute('aria-label', `Открыть ${item.title}`);
+      tile.setAttribute('aria-label', `Открыть ${item.title || 'материал занятия'}`);
       tile.dataset.index = String(index);
 
       const num = document.createElement('span');
@@ -35,6 +36,8 @@
       img.alt = item.alt || item.title || '';
       img.loading = 'lazy';
       img.decoding = 'async';
+      img.width = 800;
+      img.height = 600;
 
       tile.appendChild(num);
       tile.appendChild(img);
@@ -43,11 +46,44 @@
     });
   }
 
+  function preloadNeighbors() {
+    if (lessons.length < 2) return;
+    [-1, 1].forEach((delta) => {
+      const item = lessons[(activeIndex + delta + lessons.length) % lessons.length];
+      if (item && item.image) {
+        const img = new Image();
+        img.src = item.image;
+      }
+    });
+  }
+
+  function focusableInDialog() {
+    if (!lightbox) return [];
+    return Array.from(lightbox.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])'))
+      .filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
+  }
+
+  function trapTab(e) {
+    if (e.key !== 'Tab') return;
+    const focusable = focusableInDialog();
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
   function openLightbox(index) {
     if (!lightbox || !lessons.length) return;
     activeIndex = index;
     lastFocused = document.activeElement;
     setImage();
+    preloadNeighbors();
     lightbox.classList.add('is-open');
     lightbox.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
@@ -76,6 +112,7 @@
     if (!lessons.length) return;
     activeIndex = (activeIndex + delta + lessons.length) % lessons.length;
     setImage();
+    preloadNeighbors();
   }
 
   if (lightbox) {
@@ -90,13 +127,30 @@
       if (e.key === 'Escape') closeLightbox();
       else if (e.key === 'ArrowLeft') step(-1);
       else if (e.key === 'ArrowRight') step(1);
+      else trapTab(e);
+    });
+  }
+
+  /* SSR snapshot hydration: pick up lessons baked into HTML so SEO/JS-off users see them. */
+  if (grid && grid.children.length) {
+    lessons = Array.from(grid.children).map((tile) => {
+      const img = tile.querySelector('img');
+      return img ? { image: img.getAttribute('src'), title: img.getAttribute('data-title') || img.alt, alt: img.alt } : null;
+    }).filter(Boolean);
+    Array.from(grid.querySelectorAll('.lesson-tile')).forEach((tile, idx) => {
+      tile.addEventListener('click', () => openLightbox(idx));
     });
   }
 
   fetch('./lessons.json', { cache: 'no-cache' })
-    .then((r) => r.json())
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error('lessons fetch failed'))))
     .then((data) => {
-      lessons = Array.isArray(data?.lessons) ? data.lessons : [];
+      const items = Array.isArray(data && data.lessons) ? data.lessons : [];
+      if (!items.length) return;
+      lessons = items;
       renderGallery(lessons);
+    })
+    .catch((err) => {
+      console.warn('lessons.json:', err.message);
     });
 })();

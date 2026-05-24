@@ -238,7 +238,6 @@ p { margin: 0; }
   height: 720px;
   pointer-events: none;
   z-index: 0;
-  filter: blur(20px);
 }
 .bg-orb--top { top: -260px; right: -200px; }
 .bg-orb--bottom { bottom: -300px; left: -240px; }
