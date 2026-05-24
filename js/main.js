@@ -7,21 +7,13 @@
   const nav = document.getElementById('primary-navigation');
   const toggle = document.querySelector('.mobile-toggle');
   const navLinks = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
-  const stickyCta = document.querySelector('.sticky-cta');
-  const hero = document.getElementById('home');
 
   /* ----- header scroll state ----- */
-  const onScroll = () => {
-    const y = window.scrollY;
-    if (header) header.classList.toggle('is-scrolled', y > 16);
-
-    if (stickyCta && hero) {
-      const heroBottom = hero.getBoundingClientRect().bottom;
-      stickyCta.classList.toggle('is-visible', heroBottom < 60);
-    }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 16);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
   /* ----- mobile nav toggle ----- */
   if (toggle && nav) {
@@ -68,7 +60,7 @@
 
   /* ----- scroll reveal ----- */
   const revealTargets = document.querySelectorAll(
-    '.section-marker, .section-head, .process-step, .about-card, .fit-card, .specimen, .faq-list, .contact-card'
+    '.section-marker, .section-head, .process-step, .fit-card, .specimen, .faq-list, .contact-card'
   );
   revealTargets.forEach((el) => el.classList.add('reveal'));
 

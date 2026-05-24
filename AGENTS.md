@@ -63,8 +63,7 @@ python3 -m http.server 8000
 - There is no separate `#about` section in the current code; education and practice facts are shown in the hero trust strip.
 - Pricing has two clear cards with package prices and no crossed-out comparison prices.
 - Lessons render from `lessons.json`; the gallery currently has 8 items and uses `lesson5.png`.
-- Testimonials render from `testimonials.json` with collapse/expand behavior.
-- CSS still contains unused sticky CTA styles and JS still checks for `.sticky-cta`; this is harmless fallback code, not a requirement to render that element.
+- Testimonials render from `testimonials.json` with collapse/expand behavior (collapse is pure CSS via `:nth-child(n+4)`; JS only toggles `is-collapsed` + `aria-expanded`).
 
 ## Things worth preserving (soft preferences, override if you have a reason)
 

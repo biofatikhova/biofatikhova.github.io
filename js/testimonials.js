@@ -14,10 +14,9 @@
     return parts.slice(0, 2).map((p) => p[0]).join('').toUpperCase();
   }
 
-  function buildCard(item, index) {
+  function buildCard(item) {
     const article = document.createElement('article');
     article.className = 'testimonial';
-    if (index >= VISIBLE) article.classList.add('is-hidden');
 
     const quote = document.createElement('span');
     quote.className = 'testimonial-quote';
@@ -56,20 +55,14 @@
 
   function render(items) {
     grid.innerHTML = '';
-    items.forEach((item, i) => grid.appendChild(buildCard(item, i)));
+    items.forEach((item) => grid.appendChild(buildCard(item)));
 
     if (toggle && items.length > VISIBLE) {
       toggle.hidden = false;
       toggle.addEventListener('click', () => {
-        const expanded = grid.classList.toggle('is-collapsed');
-        const open = !expanded;
-        toggle.setAttribute('aria-expanded', String(open));
-        if (open) {
-          grid.querySelectorAll('.testimonial.is-hidden').forEach((el) => el.classList.remove('is-hidden'));
-        } else {
-          grid.querySelectorAll('.testimonial').forEach((el, i) => {
-            if (i >= VISIBLE) el.classList.add('is-hidden');
-          });
+        const collapsed = grid.classList.toggle('is-collapsed');
+        toggle.setAttribute('aria-expanded', String(!collapsed));
+        if (collapsed) {
           const section = document.getElementById('testimonials');
           if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }

@@ -10,28 +10,9 @@
   const prevBtn = lightbox && lightbox.querySelector('.lightbox-prev');
   const nextBtn = lightbox && lightbox.querySelector('.lightbox-next');
 
-  if (lightbox && lightbox.parentElement !== document.body) {
-    document.body.appendChild(lightbox);
-  }
-
   let lessons = [];
   let activeIndex = 0;
   let lastFocused = null;
-
-  const FALLBACK = [
-    { n: 1, ext: 'jpg' },
-    { n: 2, ext: 'jpg' },
-    { n: 3, ext: 'jpg' },
-    { n: 4, ext: 'jpg' },
-    { n: 5, ext: 'png' },
-    { n: 6, ext: 'jpg' },
-    { n: 7, ext: 'jpg' },
-    { n: 8, ext: 'jpg' },
-  ].map(({ n, ext }, i) => ({
-    image: `./images/lessons/lesson${n}.${ext}`,
-    title: `Пример занятия ${i + 1}`,
-    alt: `Пример учебного материала по биологии ${i + 1}`,
-  }));
 
   const pad2 = (n) => String(n).padStart(2, '0');
 
@@ -113,13 +94,9 @@
   }
 
   fetch('./lessons.json', { cache: 'no-cache' })
-    .then((r) => (r.ok ? r.json() : Promise.reject(new Error('lessons fetch failed'))))
+    .then((r) => r.json())
     .then((data) => {
-      lessons = Array.isArray(data?.lessons) && data.lessons.length ? data.lessons : FALLBACK;
-      renderGallery(lessons);
-    })
-    .catch(() => {
-      lessons = FALLBACK;
+      lessons = Array.isArray(data?.lessons) ? data.lessons : [];
       renderGallery(lessons);
     });
 })();

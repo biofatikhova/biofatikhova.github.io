@@ -483,9 +483,7 @@
   .hero-plate { order: 2; max-width: 460px; justify-self: center; width: 100%; }
   .hero-text { order: 1; }
   .hero-plate-photo { aspect-ratio: 5 / 4; object-position: center 40%; }
-}
 
-@media (max-width: 880px) {
   .hero-stamps {
     grid-template-columns: 1fr 1fr;
     column-gap: 0;

@@ -20,6 +20,21 @@
 </head>
 <body>
 
+  <!-- shared SVG defs -->
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <defs>
+      <symbol id="brand-mark" viewBox="0 0 32 32">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <path d="M16 4 C 9 10, 6 18, 16 28 C 26 18, 23 10, 16 4 Z"/>
+          <path d="M16 6 L 16 26"/>
+          <path d="M16 12 L 11 14"/>
+          <path d="M16 16 L 22 18"/>
+          <path d="M16 20 L 12 21.5"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <!-- ambient botanical decoration -->
   <svg class="bg-orb bg-orb--top" viewBox="0 0 600 600" aria-hidden="true">
     <defs>
@@ -47,13 +62,7 @@
     <div class="container nav-wrap">
       <a href="#home" class="brand" aria-label="БиоФатихова — на главную">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <path d="M16 4 C 9 10, 6 18, 16 28 C 26 18, 23 10, 16 4 Z"/>
-            <path d="M16 6 L 16 26"/>
-            <path d="M16 12 L 11 14"/>
-            <path d="M16 16 L 22 18"/>
-            <path d="M16 20 L 12 21.5"/>
-          </svg>
+          <svg viewBox="0 0 32 32"><use href="#brand-mark"/></svg>
         </span>
         <span class="brand-word">
           <em>Био</em>Фатихова
@@ -284,17 +293,6 @@
       </div>
     </section>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр материала занятия" hidden>
-      <button class="lightbox-close" aria-label="Закрыть">×</button>
-      <button class="lightbox-nav lightbox-prev" aria-label="Предыдущее изображение">‹</button>
-      <button class="lightbox-nav lightbox-next" aria-label="Следующее изображение">›</button>
-      <figure class="lightbox-content">
-        <img id="lightbox-image" src="" alt="">
-        <figcaption id="lightbox-caption" class="lightbox-caption"></figcaption>
-      </figure>
-    </div>
-
     <!-- 05 — Pricing -->
     <section id="pricing" class="section section--ink">
       <div class="container">
@@ -503,13 +501,7 @@
         <div class="footer-col footer-col--brand">
           <a href="#home" class="brand brand--footer">
             <span class="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-                <path d="M16 4 C 9 10, 6 18, 16 28 C 26 18, 23 10, 16 4 Z"/>
-                <path d="M16 6 L 16 26"/>
-                <path d="M16 12 L 11 14"/>
-                <path d="M16 16 L 22 18"/>
-                <path d="M16 20 L 12 21.5"/>
-              </svg>
+              <svg viewBox="0 0 32 32"><use href="#brand-mark"/></svg>
             </span>
             <span class="brand-word"><em>Био</em>Фатихова</span>
           </a>
@@ -555,6 +547,17 @@
       </div>
     </div>
   </footer>
+
+  <!-- Lightbox (body-level dialog) -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр материала занятия" hidden>
+    <button class="lightbox-close" aria-label="Закрыть">×</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Предыдущее изображение">‹</button>
+    <button class="lightbox-nav lightbox-next" aria-label="Следующее изображение">›</button>
+    <figure class="lightbox-content">
+      <img id="lightbox-image" src="" alt="">
+      <figcaption id="lightbox-caption" class="lightbox-caption"></figcaption>
+    </figure>
+  </div>
 
   <!-- JavaScript -->
   <script src="js/main.js?v=5" defer></script>
