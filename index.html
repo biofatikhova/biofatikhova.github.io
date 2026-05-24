@@ -31,10 +31,10 @@
   <link rel="preload" as="image" href="images/profile/new_profile.jpg" fetchpriority="high" type="image/jpeg">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
-  <link rel="stylesheet" href="css/main.css?v=8">
-  <link rel="stylesheet" href="css/layout.css?v=8">
-  <link rel="stylesheet" href="css/components.css?v=8">
-  <link rel="stylesheet" href="css/animations.css?v=8">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
 
   <script type="application/ld+json">
   {
@@ -353,17 +353,7 @@
           <p class="section-lead">Примеры моих уроков.</p>
         </header>
 
-        <div id="lessons-grid" class="lessons-grid" aria-label="Галерея учебных материалов">
-          <!-- baked snapshot of lessons.json; js/simple-lightbox.js re-renders from JSON on load -->
-          <button type="button" class="lesson-tile" data-index="0" aria-label="Открыть Пример занятия 1"><span class="lesson-tile-num">01</span><img src="./images/lessons/lesson1.jpg" alt="Пример учебного материала по биологии 1" loading="lazy" decoding="async"></button>
-          <button type="button" class="lesson-tile" data-index="1" aria-label="Открыть Пример занятия 2"><span class="lesson-tile-num">02</span><img src="./images/lessons/lesson2.jpg" alt="Пример учебного материала по биологии 2" loading="lazy" decoding="async"></button>
-          <button type="button" class="lesson-tile" data-index="2" aria-label="Открыть Пример занятия 3"><span class="lesson-tile-num">03</span><img src="./images/lessons/lesson3.jpg" alt="Пример учебного материала по биологии 3" loading="lazy" decoding="async"></button>
-          <button type="button" class="lesson-tile" data-index="3" aria-label="Открыть Пример занятия 4"><span class="lesson-tile-num">04</span><img src="./images/lessons/lesson4.jpg" alt="Пример учебного материала по биологии 4" loading="lazy" decoding="async"></button>
-          <button type="button" class="lesson-tile" data-index="4" aria-label="Открыть Пример занятия 5"><span class="lesson-tile-num">05</span><img src="./images/lessons/lesson5.jpg" alt="Пример учебного материала по биологии 5" loading="lazy" decoding="async"></button>
-          <button type="button" class="lesson-tile" data-index="5" aria-label="Открыть Пример занятия 6"><span class="lesson-tile-num">06</span><img src="./images/lessons/lesson6.jpg" alt="Пример учебного материала по биологии 6" loading="lazy" decoding="async"></button>
-          <button type="button" class="lesson-tile" data-index="6" aria-label="Открыть Пример занятия 7"><span class="lesson-tile-num">07</span><img src="./images/lessons/lesson7.jpg" alt="Пример учебного материала по биологии 7" loading="lazy" decoding="async"></button>
-          <button type="button" class="lesson-tile" data-index="7" aria-label="Открыть Пример занятия 8"><span class="lesson-tile-num">08</span><img src="./images/lessons/lesson8.jpg" alt="Пример учебного материала по биологии 8" loading="lazy" decoding="async"></button>
-        </div>
+        <div id="lessons-grid" class="lessons-grid" aria-label="Галерея учебных материалов" aria-busy="true"></div>
       </div>
     </section>
 
@@ -463,21 +453,7 @@
           <p class="section-lead">Все отзывы взяты с <a href="https://profi.ru/profile/FatihovaMA/reviews/" target="_blank" rel="noopener">профиля на Profi.ru</a>, где их можно проверить.</p>
         </header>
 
-        <div class="testimonials-grid is-collapsed" id="testimonials-grid">
-          <!-- baked snapshot of testimonials.json; js/testimonials.js re-renders from JSON on load -->
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Очень благодарна Маргарите Альмировне за профессиональный подход. Благодаря её урокам я значительно лучше поняла сложные темы и увереннее справилась с подготовкой к экзаменам. У неё есть индивидуальный подход и умение объяснить материал доступно. Очень довольна результатом и буду рекомендовать этого репетитора своим знакомым!</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">П</span><div class="testimonial-meta"><span class="testimonial-author">Полина</span><span class="testimonial-date">14 мая 2026</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Безумно благодарны Маргарите Альмировне за её профессионализм! Ребёнок стал лучше учиться, чувствует себя уверенно в учёбе, появилась любовь к предмету. Благодарны ещё за очень тяжёлый от нас запрос: ребёнок после травмы, всегда поймёт нас, наше состояние сложное. Ребёнок безумно доволен и рад учителю. Огромное спасибо 🙏🏽 Ценим и благодарим за Ваш труд!</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">Е</span><div class="testimonial-meta"><span class="testimonial-author">Елена</span><span class="testimonial-date">1 февраля 2026</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Хорошие занятия. Ребёнок стал лучше понимать школьную программу, что и требовалось.</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">Е</span><div class="testimonial-meta"><span class="testimonial-author">Евгений</span><span class="testimonial-date">29 декабря 2024</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Спасибо большое за занятие. Задача была за каникулы пройти темы, которые уже были, и пройти вперёд, чтобы ребёнок понимал предмет и уверенно себя чувствовала, так как понимания предмета не было вообще у ребёнка. Ребёнок заинтересован и так не нервничает при слове «биология» 🙈</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">А</span><div class="testimonial-meta"><span class="testimonial-author">Ануш</span><span class="testimonial-date">7 ноября 2024</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Маргарита Альмировна прекрасный учитель биологии! Моя дочь перешла в медицинский класс (5 класс), учится хорошо, но хочется полного погружения в новый предмет. Учитель подбирает к каждому уроку интересные задания, которые расширяют кругозор, разбирают домашнее задание, повторяют пройденный материал и работают на перспективу. Уроки очень эффективные и увлекательные! Лабораторные и практические задания в школе выполняются с лёгкостью. Дочь в восторге от учителя и от занятий!</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">И</span><div class="testimonial-meta"><span class="testimonial-author">Инна</span><span class="testimonial-date">1 ноября 2024</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Биологией занимается дочка, 9 лет. Она очень довольна, на занятия идёт с удовольствием, и это для меня главное.</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">Н</span><div class="testimonial-meta"><span class="testimonial-author">Наталья</span><span class="testimonial-date">30 декабря 2023</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Занимаюсь биологией для себя. Очень нравится коммуницировать с Маргаритой: доступно объясняется материал, лёгкая подача и приятная атмосфера на уроках 😊</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">Е</span><div class="testimonial-meta"><span class="testimonial-author">Ева</span><span class="testimonial-date">2 октября 2023</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Прекрасный репетитор. Дочь довольна. Программу усвоила, получила хорошую оценку за год. Спасибо большое!</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">ЕТ</span><div class="testimonial-meta"><span class="testimonial-author">Елена Толстова</span><span class="testimonial-date">24 июня 2023</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Выражаю огромную благодарность Маргарите за помощь в столь короткое время для подготовки к ОГЭ моей дочки. За месяц! В итоге — оценка 5!</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">Г</span><div class="testimonial-meta"><span class="testimonial-author">Генриетта</span><span class="testimonial-date">6 июня 2023</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Индивидуальный подход, понятно объясняет.</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">О</span><div class="testimonial-meta"><span class="testimonial-author">Олеся</span><span class="testimonial-date">23 апреля 2023</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Очень приятно работать с Маргаритой Альмировной. Материал быстро и легко запоминается. Советую.</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">К</span><div class="testimonial-meta"><span class="testimonial-author">Кристина</span><span class="testimonial-date">7 апреля 2023</span></div></div></article>
-          <article class="testimonial"><span class="testimonial-quote" aria-hidden="true">“</span><p class="testimonial-text">Грамотный специалист.</p><div class="testimonial-foot"><span class="testimonial-avatar" aria-hidden="true">Р</span><div class="testimonial-meta"><span class="testimonial-author">Ринат</span><span class="testimonial-date">23 марта 2023</span></div></div></article>
-        </div>
+        <div class="testimonials-grid" id="testimonials-grid" aria-busy="true"></div>
 
         <div class="testimonials-toggle-wrap">
           <button class="testimonials-toggle" id="testimonials-toggle-btn" type="button" aria-controls="testimonials-grid" aria-expanded="false" hidden>
@@ -646,8 +622,9 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="js/main.js?v=8" defer></script>
-  <script src="js/simple-lightbox.js?v=8" defer></script>
-  <script src="js/testimonials.js?v=8" defer></script>
+  <script src="js/body-lock.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/simple-lightbox.js" defer></script>
+  <script src="js/testimonials.js" defer></script>
 </body>
 </html>

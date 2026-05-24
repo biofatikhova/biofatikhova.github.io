@@ -80,14 +80,12 @@
   function acquireLock() {
     if (isLocked) return;
     isLocked = true;
-    if (window.__bodyLock) window.__bodyLock.acquire();
-    else document.body.style.overflow = 'hidden';
+    window.bodyLock.acquire();
   }
   function releaseLock() {
     if (!isLocked) return;
     isLocked = false;
-    if (window.__bodyLock) window.__bodyLock.release();
-    else document.body.style.removeProperty('overflow');
+    window.bodyLock.release();
   }
 
   function openLightbox(index) {
@@ -143,17 +141,6 @@
     });
   }
 
-  /* SSR snapshot hydration: pick up lessons baked into HTML so SEO/JS-off users see them. */
-  if (grid && grid.children.length) {
-    lessons = Array.from(grid.children).map((tile) => {
-      const img = tile.querySelector('img');
-      return img ? { image: img.getAttribute('src'), title: img.getAttribute('data-title') || img.alt, alt: img.alt } : null;
-    }).filter(Boolean);
-    Array.from(grid.querySelectorAll('.lesson-tile')).forEach((tile, idx) => {
-      tile.addEventListener('click', () => openLightbox(idx));
-    });
-  }
-
   fetch('./lessons.json', { cache: 'no-cache' })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error('lessons fetch failed'))))
     .then((data) => {
@@ -161,6 +148,7 @@
       if (!items.length) return;
       lessons = items;
       renderGallery(lessons);
+      if (grid) grid.removeAttribute('aria-busy');
     })
     .catch((err) => {
       console.warn('lessons.json:', err.message);

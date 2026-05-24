@@ -62,7 +62,7 @@ python3 -m http.server 8000
 - There is no separate `#about` section in the current code; education and practice facts are shown in the hero trust strip.
 - Pricing has two clear cards with package prices and no crossed-out comparison prices.
 - Lessons render from `lessons.json`; the gallery currently has 8 items (all `.jpg`).
-- Testimonials render from `testimonials.json` with collapse/expand behavior (collapse is pure CSS via `:nth-child(n+4)`; JS only toggles `is-collapsed` + `aria-expanded`).
+- Testimonials render from `testimonials.json`. `js/testimonials.js` owns collapse/expand: it sets `hidden` on cards past the first 3, toggles `is-collapsed` + `aria-expanded` on the button, and disables collapse on the mobile rail viewport (≤700px).
 
 ## Things worth preserving (soft preferences, override if you have a reason)
 

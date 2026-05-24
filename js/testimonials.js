@@ -1,13 +1,19 @@
 /**
  * Testimonials loader with collapse/expand.
+ * JS owns visibility (hidden attribute on cards past VISIBLE).
+ * On mobile (rail layout) collapse is disabled — all cards visible, toggle hidden.
  */
 (function () {
   const grid = document.getElementById('testimonials-grid');
   const toggle = document.getElementById('testimonials-toggle-btn');
   const VISIBLE = 3;
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const railMQ = window.matchMedia('(max-width: 700px)');
 
   if (!grid) return;
+
+  let cards = [];
+  let collapsed = true;
 
   function initials(name) {
     if (!name) return '·';
@@ -54,18 +60,27 @@
     return article;
   }
 
-  function bindToggle(itemCount) {
-    if (!toggle) return;
-    if (itemCount <= VISIBLE) {
-      toggle.hidden = true;
-      return;
+  function applyVisibility() {
+    const isRail = railMQ.matches;
+    const hidePast = collapsed && !isRail && cards.length > VISIBLE;
+    cards.forEach((card, i) => {
+      if (hidePast && i >= VISIBLE) card.setAttribute('hidden', '');
+      else card.removeAttribute('hidden');
+    });
+    grid.classList.toggle('is-collapsed', collapsed && !isRail);
+    if (toggle) {
+      const needToggle = !isRail && cards.length > VISIBLE;
+      toggle.hidden = !needToggle;
+      toggle.setAttribute('aria-expanded', String(!collapsed));
     }
-    toggle.hidden = false;
-    if (toggle.dataset.bound === '1') return;
+  }
+
+  function bindToggle() {
+    if (!toggle || toggle.dataset.bound === '1') return;
     toggle.dataset.bound = '1';
     toggle.addEventListener('click', () => {
-      const collapsed = grid.classList.toggle('is-collapsed');
-      toggle.setAttribute('aria-expanded', String(!collapsed));
+      collapsed = !collapsed;
+      applyVisibility();
       if (collapsed) {
         const section = document.getElementById('testimonials');
         if (section) section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
@@ -76,11 +91,13 @@
   function render(items) {
     grid.innerHTML = '';
     items.forEach((item) => grid.appendChild(buildCard(item)));
-    bindToggle(items.length);
+    cards = Array.from(grid.children);
+    bindToggle();
+    applyVisibility();
+    grid.removeAttribute('aria-busy');
   }
 
-  /* If HTML already shipped a baked snapshot, bind the toggle to that count first. */
-  if (grid.children.length) bindToggle(grid.children.length);
+  railMQ.addEventListener('change', applyVisibility);
 
   fetch('./testimonials.json', { cache: 'no-cache' })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error('testimonials fetch failed'))))

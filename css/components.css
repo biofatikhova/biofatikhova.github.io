@@ -520,6 +520,7 @@
   box-shadow: var(--shadow-low);
   transition: transform var(--d-base) var(--ease-out), box-shadow var(--d-base) var(--ease-out);
 }
+.testimonial[hidden] { display: none; }
 .testimonial:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-mid);
@@ -579,8 +580,6 @@
   letter-spacing: 0.06em;
 }
 
-.testimonials-grid.is-collapsed .testimonial:nth-child(n+4) { display: none; }
-
 .testimonials-toggle-wrap {
   display: flex;
   justify-content: center;
@@ -635,10 +634,6 @@
   .testimonial {
     scroll-snap-align: start;
     scroll-snap-stop: always;
-  }
-
-  .testimonials-grid.is-collapsed .testimonial:nth-child(n+4) {
-    display: flex;
   }
 
   .testimonials-toggle-wrap {

@@ -2,22 +2,7 @@
  * Site behavior: header scroll state, mobile nav, active section highlight, scroll-reveal.
  */
 (function () {
-  /* shared body scroll lock — ref-counted so lightbox + mobile nav can coexist */
-  const bodyLock = (() => {
-    let count = 0;
-    return {
-      acquire() {
-        count++;
-        if (count === 1) document.body.style.overflow = 'hidden';
-      },
-      release() {
-        if (count === 0) return;
-        count--;
-        if (count === 0) document.body.style.removeProperty('overflow');
-      },
-    };
-  })();
-  window.__bodyLock = bodyLock;
+  const bodyLock = window.bodyLock;
 
   const header = document.querySelector('.site-header');
   const nav = document.getElementById('primary-navigation');
