@@ -371,6 +371,13 @@
   letter-spacing: -0.01em;
 }
 .hero-stamp-key strong { font-weight: 500; }
+.hero-stamp-key-unit {
+  font-family: var(--font-display);
+  font-size: 0.58em;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
 .hero-stamp-stars {
   color: var(--ochre);
   font-size: 0.85rem;
@@ -400,29 +407,56 @@
 .hero-stamp-link:hover .hero-stamp-val-label { color: var(--moss); }
 .hero-stamp-arrow {
   display: inline-flex;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--moss);
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
   margin-left: auto;
-  transition: transform var(--d-fast) var(--ease-out);
+  border: 1px solid var(--moss);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  line-height: 1;
+  color: var(--moss);
+  background: transparent;
+  transition:
+    transform var(--d-fast) var(--ease-out),
+    background-color var(--d-fast) var(--ease-out),
+    color var(--d-fast) var(--ease-out);
 }
-.hero-stamp-link:hover .hero-stamp-arrow { transform: translate(2px, -2px); }
+.hero-stamp-link:hover .hero-stamp-arrow {
+  background: var(--moss);
+  color: var(--paper);
+  transform: translate(2px, -2px);
+}
+.hero-stamp-link:focus-visible .hero-stamp-arrow {
+  background: var(--moss);
+  color: var(--paper);
+}
 .hero-stamp--rating .hero-stamp-val { width: 100%; }
 
-/* Edu (4th stamp) overrides — title + 2-line degree list */
-.hero-stamp--edu { gap: 8px; }
-.hero-stamp-key--edu {
+/* Degree stamps: title in display serif (degree + university stay together), */
+/* year as small mono annotation, institute as italic display body. */
+.hero-stamp--degree { gap: 6px; }
+.hero-stamp-key--degree {
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 2px;
   font-size: clamp(1rem, 1.25vw, 1.15rem);
   line-height: 1.15;
   letter-spacing: -0.005em;
 }
-.hero-stamp-key--edu strong { font-weight: 500; }
-.hero-stamp-edu-sep { color: var(--ink-faint); margin: 0 2px; }
-.hero-stamp-edu-org { font-style: italic; color: var(--moss); }
-.hero-stamp-val--edu {
-  flex-direction: column;
+.hero-stamp-key--degree strong { font-weight: 500; }
+.hero-stamp-degree-title { white-space: nowrap; }
+.hero-stamp-year {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+}
+.hero-stamp-val--degree {
   align-items: flex-start;
-  gap: 2px;
   font-family: var(--font-display);
   font-style: italic;
   font-size: 0.86rem;
@@ -430,18 +464,6 @@
   letter-spacing: 0;
   text-transform: none;
   color: var(--ink-soft);
-}
-.hero-stamp-edu-row {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.hero-stamp-edu-year {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-size: 0.66rem;
-  letter-spacing: 0.18em;
-  color: var(--moss);
 }
 
 /* ----- Responsive ----- */
@@ -492,8 +514,22 @@
     align-items: flex-start;
     gap: 8px;
   }
+  .hero-stamp {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .hero-stamp:nth-child(odd) { padding-left: 0; }
+  .hero-stamp:nth-child(even) { padding-right: 0; }
+  .hero-stamp-val--degree { font-size: 0.78rem; }
   .hero-ctas .btn { width: 100%; }
   .hero-plate { max-width: none; }
+}
+
+@media (max-width: 380px) {
+  .hero-stamp-val {
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+  }
 }
 
 /* ============ Footer ============ */
