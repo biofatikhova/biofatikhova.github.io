@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Маргарита Фатихова — репетитор по биологии. Подготовка к ЕГЭ и ОГЭ, занятия для 5–11 классов. Первый 20-минутный пробный урок бесплатно.">
+  <meta name="description" content="Маргарита Фатихова — репетитор по биологии. Подготовка к ЕГЭ и ОГЭ, занятия для 5–11 классов. 20-минутный пробный урок бесплатно.">
   <meta name="theme-color" content="#14271D">
   <title>БиоФатихова — репетитор по биологии</title>
 
@@ -13,10 +13,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/main.css?v=5">
+  <link rel="stylesheet" href="css/layout.css?v=5">
+  <link rel="stylesheet" href="css/components.css?v=5">
+  <link rel="stylesheet" href="css/animations.css?v=5">
 </head>
 <body>
 
@@ -61,7 +61,6 @@
       </a>
 
       <nav class="nav-menu" id="primary-navigation" aria-label="Главное меню">
-        <a href="#about" class="nav-link">Обо мне</a>
         <a href="#fit" class="nav-link">Кому подойдёт</a>
         <a href="#lessons" class="nav-link">Занятия</a>
         <a href="#pricing" class="nav-link">Стоимость</a>
@@ -87,30 +86,30 @@
     <!-- 01 — Hero -->
     <section id="home" class="hero">
       <div class="container">
-        <div class="section-marker">
+        <div class="section-marker hero-marker">
           <span class="marker-num">01</span>
           <span class="marker-line" aria-hidden="true"></span>
           <span class="marker-label">Репетитор по биологии</span>
         </div>
 
         <div class="hero-grid">
-          <div class="hero-left">
+          <div class="hero-text">
             <h1 class="hero-title">
-              <span class="hero-title-main"><em>биология</em></span>
-              <span class="hero-title-tail">понятно и без зубрёжки</span>
+              <em class="hero-title-main">биология</em>
+              <span class="hero-title-tail">понятно <span class="hero-title-amp">и</span> без зубрёжки</span>
             </h1>
 
-            <p class="hero-bio">
-              Маргарита Фатихова — преподаватель биологии.<br>Готовлю к ОГЭ и ЕГЭ, веду школьников 5–11 классов, помогаю закрывать пробелы и расширять программу.
-            </p>
-
-            <div class="hero-diagnostic">
-              <span class="dot" aria-hidden="true"></span>
-              <div class="hero-diagnostic-text">
-                <strong>Бесплатный 20-минутный пробный урок</strong>
-                <span>для новых учеников — знакомимся, смотрим уровень, намечаем план</span>
+            <div class="hero-byline">
+              <div class="hero-byline-labels">
+                <span class="hero-byline-label">Преподаватель</span>
+                <span class="hero-byline-label hero-byline-label--online">Онлайн</span>
               </div>
+              <span class="hero-byline-name">Маргарита Альмировна Фатихова</span>
             </div>
+
+            <p class="hero-bio">
+              Работаю со школьниками 5–11 классов: готовлю к ОГЭ и ЕГЭ, помогаю закрыть пробелы и расширить кругозор.
+            </p>
 
             <div class="hero-ctas">
               <a href="https://t.me/biofatikhova" class="btn btn-primary cta-link" target="_blank" rel="noopener" data-cta="hero-telegram">
@@ -120,53 +119,51 @@
               <a href="#pricing" class="btn btn-ghost" data-cta="hero-pricing">Стоимость занятий →</a>
             </div>
 
-            <a href="https://profi.ru/profile/FatihovaMA/" class="profi-badge" target="_blank" rel="noopener" data-cta="hero-profi">
-              <span class="profi-score">
-                <span class="profi-stars" aria-hidden="true">★★★★★</span>
-                <strong class="profi-rating">5.0</strong>
+            <p class="hero-trial">
+              <span class="hero-trial-dot" aria-hidden="true"></span>
+              <span class="hero-trial-text">
+                <strong>20-минутный пробный урок — бесплатно.</strong>
               </span>
-              <span class="profi-meta">
-                <span class="profi-meta-label">Рейтинг на</span>
-                <img src="./images/icons/profi.svg" alt="Профи.ру" class="profi-logo">
-              </span>
-              <span class="profi-arrow" aria-hidden="true">↗</span>
-            </a>
+            </p>
           </div>
 
-          <div class="hero-right">
-            <div class="portrait">
-              <svg class="portrait-frame" viewBox="0 0 320 320" aria-hidden="true">
-                <circle cx="160" cy="160" r="155" fill="none" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2 3"/>
-                <circle cx="160" cy="160" r="145" fill="none" stroke="currentColor" stroke-width="0.4"/>
-              </svg>
-              <img src="./images/profile/profile.jpg" alt="Маргарита Фатихова" class="portrait-img" width="280" height="280" fetchpriority="high" decoding="async">
-
-              <svg class="portrait-leaf portrait-leaf--tl" viewBox="0 0 120 120" aria-hidden="true">
-                <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
-                  <path d="M10 110 C 30 70, 60 40, 110 20"/>
-                  <path d="M30 90 C 45 80, 55 75, 60 65" />
-                  <path d="M50 70 C 60 64, 65 60, 70 50" />
-                  <path d="M70 50 C 78 45, 82 42, 86 35" />
-                </g>
-              </svg>
-
-              <svg class="portrait-leaf portrait-leaf--br" viewBox="0 0 140 140" aria-hidden="true">
-                <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
-                  <path d="M130 130 C 100 100, 70 80, 20 60"/>
-                  <ellipse cx="40" cy="68" rx="14" ry="5" transform="rotate(20 40 68)"/>
-                  <ellipse cx="70" cy="84" rx="14" ry="5" transform="rotate(20 70 84)"/>
-                  <ellipse cx="100" cy="104" rx="14" ry="5" transform="rotate(20 100 104)"/>
-                </g>
-              </svg>
+          <figure class="hero-plate">
+            <div class="hero-plate-frame">
+              <img src="./images/profile/new_profile.png" alt="Маргарита Фатихова за рабочим столом с учебниками и микроскопом" class="hero-plate-photo" width="1672" height="941" fetchpriority="high" decoding="async">
             </div>
-
-            <div class="portrait-tag">
-              <span class="portrait-tag-label">Преподаватель</span>
-              <span class="portrait-tag-name">Маргарита Альмировна Фатихова</span>
-              <span class="portrait-tag-meta">КФУ · 6+ лет практики</span>
-            </div>
-          </div>
+          </figure>
         </div>
+
+        <ul class="hero-stamps" aria-label="Подтверждённые факты">
+          <li class="hero-stamp hero-stamp--rating">
+            <a href="https://profi.ru/profile/FatihovaMA/" target="_blank" rel="noopener" data-cta="hero-profi" class="hero-stamp-link">
+              <span class="hero-stamp-key">
+                <span class="hero-stamp-stars" aria-hidden="true">★★★★★</span>
+                <strong>5.0</strong>
+              </span>
+              <span class="hero-stamp-val">
+                <span class="hero-stamp-val-label">на</span>
+                <img src="./images/icons/profi.svg" alt="Профи.ру" class="hero-stamp-logo">
+                <span class="hero-stamp-arrow" aria-hidden="true">↗</span>
+              </span>
+            </a>
+          </li>
+          <li class="hero-stamp">
+            <span class="hero-stamp-key"><strong>100+</strong></span>
+            <span class="hero-stamp-val">учеников за&nbsp;6+ лет практики</span>
+          </li>
+          <li class="hero-stamp">
+            <span class="hero-stamp-key"><strong>5–11</strong></span>
+            <span class="hero-stamp-val">классы · ОГЭ · ЕГЭ</span>
+          </li>
+          <li class="hero-stamp hero-stamp--edu">
+            <span class="hero-stamp-key hero-stamp-key--edu"><strong>Образование</strong> <span class="hero-stamp-edu-sep">·</span> <span class="hero-stamp-edu-org">КФУ</span></span>
+            <span class="hero-stamp-val hero-stamp-val--edu">
+              <span class="hero-stamp-edu-row"><span class="hero-stamp-edu-year">2023</span> Магистр педагогики</span>
+              <span class="hero-stamp-edu-row"><span class="hero-stamp-edu-year">2021</span> Бакалавр биологии</span>
+            </span>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -211,47 +208,11 @@
       </div>
     </section>
 
-    <!-- 03 — About -->
-    <section id="about" class="section">
-      <div class="container">
-        <div class="section-marker">
-          <span class="marker-num">03</span>
-          <span class="marker-line" aria-hidden="true"></span>
-          <span class="marker-label">Обо мне</span>
-        </div>
-
-        <header class="section-head">
-          <h2 class="section-title">Преподаю биологию <em>интересно</em>.</h2>
-          <p class="section-lead">Профессиональный опыт и образование — коротко и по делу.</p>
-        </header>
-
-        <div class="about-grid">
-          <article class="about-card">
-            <span class="about-card-tag">Образование</span>
-            <h3>КФУ, биология и педагогика</h3>
-            <ul class="about-stats">
-              <li><span>2023</span> Магистр педагогики</li>
-              <li><span>2021</span> Бакалавр биологии</li>
-            </ul>
-          </article>
-          <article class="about-card">
-            <span class="about-card-tag">Практика</span>
-            <h3>Шесть лет в репетиторстве</h3>
-            <ul class="about-stats">
-              <li><span>6+</span> лет опыта</li>
-              <li><span>5–11</span> классы</li>
-              <li><span>100+</span> учеников</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04 — Fit -->
+    <!-- 03 — Fit -->
     <section id="fit" class="section section--paper">
       <div class="container">
         <div class="section-marker">
-          <span class="marker-num">04</span>
+          <span class="marker-num">03</span>
           <span class="marker-line" aria-hidden="true"></span>
           <span class="marker-label">Кому подойдут занятия</span>
         </div>
@@ -300,18 +261,18 @@
       </div>
     </section>
 
-    <!-- 05 — Lessons -->
+    <!-- 04 — Lessons -->
     <section id="lessons" class="section">
       <div class="container">
         <div class="section-marker">
-          <span class="marker-num">05</span>
+          <span class="marker-num">04</span>
           <span class="marker-line" aria-hidden="true"></span>
           <span class="marker-label">Мои занятия</span>
         </div>
 
         <header class="section-head">
-          <h2 class="section-title">Примеры моих <em>уроков</em>.</h2>
-          <p class="section-lead">Примеры занятий и учебных материалов.</p>
+          <h2 class="section-title">Преподаю биологию <em>интересно</em>.</h2>
+          <p class="section-lead">Примеры моих уроков.</p>
         </header>
 
         <div id="lessons-grid" class="lessons-grid" aria-label="Галерея учебных материалов">
@@ -331,18 +292,18 @@
       </figure>
     </div>
 
-    <!-- 06 — Pricing -->
+    <!-- 05 — Pricing -->
     <section id="pricing" class="section section--ink">
       <div class="container">
         <div class="section-marker section-marker--inverse">
-          <span class="marker-num">06</span>
+          <span class="marker-num">05</span>
           <span class="marker-line" aria-hidden="true"></span>
           <span class="marker-label">Стоимость занятий</span>
         </div>
 
         <header class="section-head section-head--inverse">
           <h2 class="section-title">Два понятных <em>тарифа</em>.</h2>
-          <p class="section-lead">Первый 20-минутный пробный урок — бесплатно. Дальше — то, что подойдёт ученику.</p>
+          <p class="section-lead">20-минутный пробный урок — бесплатно. Дальше — то, что подойдёт ученику.</p>
         </header>
 
         <div class="pricing-grid">
@@ -413,11 +374,11 @@
       </div>
     </section>
 
-    <!-- 07 — Testimonials -->
+    <!-- 06 — Testimonials -->
     <section id="testimonials" class="section">
       <div class="container">
         <div class="section-marker">
-          <span class="marker-num">07</span>
+          <span class="marker-num">06</span>
           <span class="marker-line" aria-hidden="true"></span>
           <span class="marker-label">Отзывы</span>
         </div>
@@ -441,11 +402,11 @@
       </div>
     </section>
 
-    <!-- 08 — FAQ -->
+    <!-- 07 — FAQ -->
     <section id="faq" class="section section--paper">
       <div class="container">
         <div class="section-marker">
-          <span class="marker-num">08</span>
+          <span class="marker-num">07</span>
           <span class="marker-line" aria-hidden="true"></span>
           <span class="marker-label">Частые вопросы</span>
         </div>
@@ -494,11 +455,11 @@
       </div>
     </section>
 
-    <!-- 09 — Contact -->
+    <!-- 08 — Contact -->
     <section id="contact" class="section section--final">
       <div class="container">
         <div class="section-marker">
-          <span class="marker-num">09</span>
+          <span class="marker-num">08</span>
           <span class="marker-line" aria-hidden="true"></span>
           <span class="marker-label">Контакт</span>
         </div>
@@ -580,7 +541,7 @@
             <li>Подготовка к ЕГЭ и ОГЭ</li>
             <li>Школьная программа 5–11 кл.</li>
             <li>Углублённая биология</li>
-            <li>Первый пробный урок — бесплатно</li>
+            <li>Пробный урок — бесплатно</li>
           </ul>
         </div>
       </div>
@@ -593,8 +554,8 @@
   </footer>
 
   <!-- JavaScript -->
-  <script src="js/main.js" defer></script>
-  <script src="js/simple-lightbox.js" defer></script>
-  <script src="js/testimonials.js" defer></script>
+  <script src="js/main.js?v=5" defer></script>
+  <script src="js/simple-lightbox.js?v=5" defer></script>
+  <script src="js/testimonials.js?v=5" defer></script>
 </body>
 </html>

@@ -24,7 +24,7 @@ If you change the stack, **verify a clean build deploys to Pages before declarin
 - Marketing site for Маргарита Фатихова, biology tutor (БиоФатихова).
 - Audience: Russian-speaking parents and students, grades 5–11, ОГЭ/ЕГЭ prep or grade improvement.
 - Primary conversion: Telegram booking for a free 20-minute trial lesson (`пробный урок`). Keep that loud and obvious in the header, hero, pricing, FAQ, contact, and footer CTA surfaces.
-- Content lives in: page sections (about, lessons, pricing, testimonials, FAQ, contact) + two JSON files (`lessons.json`, `testimonials.json`).
+- Content lives in: page sections (`home`, `diagnostic`, `fit`, `lessons`, `pricing`, `testimonials`, `faq`, `contact`) + two JSON files (`lessons.json`, `testimonials.json`).
 - Copy is Russian. The current website copy is the source of truth; don't translate or rewrite copy unless asked.
 
 ## Current stack (replaceable)
@@ -59,7 +59,8 @@ python3 -m http.server 8000
 
 ## Current design notes
 
-- Hero prioritizes one Telegram CTA plus a secondary pricing link and a Profi.ru rating badge.
+- Hero prioritizes one Telegram CTA plus a secondary pricing link, the new profile photo (`images/profile/new_profile.png`), and a trust strip with Profi.ru rating, student count, class range, and KFU education.
+- There is no separate `#about` section in the current code; education and practice facts are shown in the hero trust strip.
 - Pricing has two clear cards with package prices and no crossed-out comparison prices.
 - Lessons render from `lessons.json`; the gallery currently has 8 items and uses `lesson5.png`.
 - Testimonials render from `testimonials.json` with collapse/expand behavior.

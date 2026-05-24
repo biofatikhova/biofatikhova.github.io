@@ -8,10 +8,6 @@
   100% { transform: scale(2);   opacity: 0;   }
 }
 
-@keyframes slow-spin {
-  to { transform: rotate(360deg); }
-}
-
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -28,23 +24,26 @@
 }
 
 /* hero entry — staggered */
-.hero-title-eyebrow,
+.hero-marker,
 .hero-title-main,
 .hero-title-tail,
+.hero-byline,
 .hero-bio,
-.hero-diagnostic,
 .hero-ctas,
-.profi-badge,
-.hero-right {
+.hero-trial,
+.hero-plate,
+.hero-stamps {
   animation: reveal var(--d-slow) var(--ease-out) both;
 }
-.hero-title-main { animation-delay: 80ms; }
-.hero-title-tail { animation-delay: 160ms; }
-.hero-bio        { animation-delay: 220ms; }
-.hero-diagnostic { animation-delay: 300ms; }
-.hero-ctas       { animation-delay: 360ms; }
-.profi-badge     { animation-delay: 440ms; }
-.hero-right      { animation-delay: 240ms; }
+.hero-marker     { animation-delay: 40ms; }
+.hero-title-main { animation-delay: 100ms; }
+.hero-title-tail { animation-delay: 180ms; }
+.hero-byline     { animation-delay: 260ms; }
+.hero-bio        { animation-delay: 320ms; }
+.hero-ctas       { animation-delay: 380ms; }
+.hero-trial      { animation-delay: 440ms; }
+.hero-plate      { animation-delay: 160ms; }
+.hero-stamps     { animation-delay: 520ms; }
 
 /* scroll-reveal hooks */
 .reveal {
@@ -68,7 +67,6 @@
   .nav-menu.is-open .nav-link:nth-child(3) { animation-delay: 120ms; }
   .nav-menu.is-open .nav-link:nth-child(4) { animation-delay: 160ms; }
   .nav-menu.is-open .nav-link:nth-child(5) { animation-delay: 200ms; }
-  .nav-menu.is-open .nav-link:nth-child(6) { animation-delay: 240ms; }
 }
 
 /* reduced motion */
@@ -79,7 +77,6 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .portrait-frame { animation: none; }
-  .hero-diagnostic .dot::after { display: none; }
+  .hero-trial-dot::after { display: none; }
   .reveal { opacity: 1; transform: none; }
 }
