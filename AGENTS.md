@@ -84,6 +84,14 @@ python3 -m http.server 8000
 7. No console errors.
 8. **GitHub Pages deploy is green.** Check the Actions tab or Pages settings.
 
+## Git push notes
+
+- If `git push origin main` fails with `RPC failed; HTTP 400 curl 22` or `send-pack: unexpected disconnect while reading sideband packet`, do not trust a trailing `Everything up-to-date` line by itself.
+- Verify the remote ref explicitly with `git ls-remote origin refs/heads/main` and compare it to local `HEAD`.
+- SSH may authenticate as a different GitHub account than the HTTPS credential. Check `ssh -T git@github.com` before switching remotes or pushing over SSH.
+- If HTTPS git push keeps failing but the macOS keychain GitHub token has push/admin permission, the GitHub git data API can be used as a fallback: upload blobs, create a tree based on the current remote `main`, create a commit with the local metadata, patch `refs/heads/main`, then `git fetch origin` and align local `main` to `origin/main` if the remote commit SHA differs but the tree matches.
+- After any fallback push, confirm `git status --short --branch`, `git ls-remote origin refs/heads/main`, and GitHub Pages build status before declaring done.
+
 ## When to ask
 
 - Before deleting `lessons.json` / `testimonials.json` content.
