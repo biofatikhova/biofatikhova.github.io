@@ -51,7 +51,7 @@
 - Основной CTA: бесплатный 20-минутный пробный урок через Telegram.
 - Основные секции в текущей версии: `home`, `diagnostic`, `fit`, `lessons`, `pricing`, `testimonials`, `faq`, `contact`.
 - Отдельной секции `about` сейчас нет: образование, опыт, рейтинг Profi.ru и фото преподавателя вынесены в hero-блок.
-- Hero использует изображение `images/profile/new_profile.png`.
+- Hero использует изображение `images/profile/new_profile.jpg`.
 - Данные галереи и отзывов редактируются в `lessons.json` и `testimonials.json`.
 - Дизайн использует теплую бумажную палитру, ботанические акценты, Playfair Display, IBM Plex Sans и IBM Plex Mono.
 

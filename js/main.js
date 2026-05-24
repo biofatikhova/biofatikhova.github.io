@@ -2,6 +2,23 @@
  * Site behavior: header scroll state, mobile nav, active section highlight, scroll-reveal.
  */
 (function () {
+  /* shared body scroll lock — ref-counted so lightbox + mobile nav can coexist */
+  const bodyLock = (() => {
+    let count = 0;
+    return {
+      acquire() {
+        count++;
+        if (count === 1) document.body.style.overflow = 'hidden';
+      },
+      release() {
+        if (count === 0) return;
+        count--;
+        if (count === 0) document.body.style.removeProperty('overflow');
+      },
+    };
+  })();
+  window.__bodyLock = bodyLock;
+
   const header = document.querySelector('.site-header');
   const nav = document.getElementById('primary-navigation');
   const toggle = document.querySelector('.mobile-toggle');
@@ -22,11 +39,13 @@
     const LABEL_OPEN = 'Открыть меню';
     const LABEL_CLOSE = 'Закрыть меню';
 
+    let navLocked = false;
     const setOpen = (open) => {
       nav.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? LABEL_CLOSE : LABEL_OPEN);
-      document.body.style.overflow = open ? 'hidden' : '';
+      if (open && !navLocked) { bodyLock.acquire(); navLocked = true; }
+      else if (!open && navLocked) { bodyLock.release(); navLocked = false; }
     };
     const closeNav = () => setOpen(false);
 

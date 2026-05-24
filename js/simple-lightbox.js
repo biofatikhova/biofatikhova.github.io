@@ -13,6 +13,7 @@
   let lessons = [];
   let activeIndex = 0;
   let lastFocused = null;
+  let isLocked = false;
 
   const pad2 = (n) => String(n).padStart(2, '0');
 
@@ -36,8 +37,6 @@
       img.alt = item.alt || item.title || '';
       img.loading = 'lazy';
       img.decoding = 'async';
-      img.width = 800;
-      img.height = 600;
 
       tile.appendChild(num);
       tile.appendChild(img);
@@ -78,6 +77,19 @@
     }
   }
 
+  function acquireLock() {
+    if (isLocked) return;
+    isLocked = true;
+    if (window.__bodyLock) window.__bodyLock.acquire();
+    else document.body.style.overflow = 'hidden';
+  }
+  function releaseLock() {
+    if (!isLocked) return;
+    isLocked = false;
+    if (window.__bodyLock) window.__bodyLock.release();
+    else document.body.style.removeProperty('overflow');
+  }
+
   function openLightbox(index) {
     if (!lightbox || !lessons.length) return;
     activeIndex = index;
@@ -86,7 +98,7 @@
     preloadNeighbors();
     lightbox.classList.add('is-open');
     lightbox.removeAttribute('hidden');
-    document.body.style.overflow = 'hidden';
+    acquireLock();
     closeBtn && closeBtn.focus();
   }
 
@@ -94,7 +106,7 @@
     if (!lightbox) return;
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('hidden', '');
-    document.body.style.removeProperty('overflow');
+    releaseLock();
     if (lastFocused && typeof lastFocused.focus === 'function') {
       lastFocused.focus();
     }

@@ -38,7 +38,6 @@ js/{main,simple-lightbox,testimonials}.js
 images/{icons,lessons,profile}/
 lessons.json
 testimonials.json
-docs/
 README.md
 ```
 
@@ -59,10 +58,10 @@ python3 -m http.server 8000
 
 ## Current design notes
 
-- Hero prioritizes one Telegram CTA plus a secondary pricing link, the new profile photo (`images/profile/new_profile.png`), and a four-column trust strip: Profi.ru rating (link with chip arrow), student count (`100+ учеников / за 6+ лет практики`), and two KFU degree columns (Бакалавр 2021, Магистр 2023). Class range info (`5–11 классы · ОГЭ · ЕГЭ`) lives in the hero copy, not the strip.
+- Hero prioritizes one Telegram CTA plus a secondary pricing link, the new profile photo (`images/profile/new_profile.jpg`), and a four-column trust strip: Profi.ru rating (link with chip arrow), student count (`100+ учеников / за 6+ лет практики`), and two KFU degree columns (Бакалавр 2021, Магистр 2023). Class range info (`5–11 классы · ОГЭ · ЕГЭ`) lives in the hero copy, not the strip.
 - There is no separate `#about` section in the current code; education and practice facts are shown in the hero trust strip.
 - Pricing has two clear cards with package prices and no crossed-out comparison prices.
-- Lessons render from `lessons.json`; the gallery currently has 8 items and uses `lesson5.png`.
+- Lessons render from `lessons.json`; the gallery currently has 8 items (all `.jpg`).
 - Testimonials render from `testimonials.json` with collapse/expand behavior (collapse is pure CSS via `:nth-child(n+4)`; JS only toggles `is-collapsed` + `aria-expanded`).
 
 ## Things worth preserving (soft preferences, override if you have a reason)
